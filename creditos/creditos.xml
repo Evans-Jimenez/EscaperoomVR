@@ -1,0 +1,79 @@
+<krpano>
+
+<!-- creditos -->
+
+
+<layer name="creditos" align="center" keep="true" enabled="true" visible="false"
+          url="../skin/creditos.jpg"
+          scale="1.0"
+		scale.mobile="0.6"
+		  zorder="99"
+		  onclick="set(visible,false);"
+		  
+		  />
+
+<!-- boton para ver creditos -->
+<layer name="botoncreditos"
+			style="drc2"
+		
+	        url="botoncreditos.png"
+			onclick="set(layer[creditos].visible,true);delayedcall(10.0,set(layer[creditos].visible,false););"
+			/> 
+		
+		<!-- <layer name="boton_inicio"
+			style="drc2"
+	        url="../skin/casita.png"
+			onclick=" goto(indice); reload_indice_visible(); stopallsounds(); "
+			/> 
+			
+	 <layer name="btn_vr"    
+	 url="../skin/vtourskin.png"     
+	 style="drc" crop="0|0|80|64"    	 
+	        scale="0.5" onclick="webvr.enterVR();" visible="true" zorder="2"/>		 -->
+		
+	
+			
+			
+			
+			
+			
+			
+<!-- estilos -->
+<style name="izq"
+	        keep="true"
+	        enabled="true"
+	        align="leftbottom"
+	        x="15" y="5"
+			scale="0.4"
+	        scale.mobile="0.2"
+			x.mobile="18"
+			y.mobile="30"
+			zorder="1"
+			/>
+			
+				
+			<style name="drc2"
+	        keep="true"
+	        enabled="true"
+	        align="righttbottom"
+	        x="20" y="20"
+			scale="0.5"
+	        scale.mobile="0.2"
+			x.mobile="18"
+			y.mobile="30"
+			zorder="1"
+			/>
+			
+			<style name="drc"
+	        keep="true"
+	        enabled="true"
+	        align="righttop"
+	        x="100" y="20"
+			scale="0.4"
+	        scale.mobile="0.2"
+			x.mobile="18"
+			y.mobile="30"
+			zorder="1"
+			/>
+
+</krpano>

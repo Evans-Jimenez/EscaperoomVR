@@ -1,0 +1,60 @@
+<krpano>
+
+	<plugin name="video" preload="true"
+			keep="true"
+			url="../plugins/videoplayer.js"
+			pausedonstart="true"
+			autoresume="true"
+			loop="false"
+			volume="0.3"
+			onloaded=""
+			onvideocomplete=""
+			/>
+
+
+<action name="ChangeVideoScene" devices="desktop"> 
+		ClearTimelines();
+		set(plugin[video].posterurl, calc:'video/%1-2k-poster.jpg');
+			videointerface_addsource('1280x720', '%CURRENTXML%/code/itinerario_1280_720.mp4|%CURRENTXML%/code/itinerario_1280_720.webm', '%CURRENTXML%/code/poster.jpg');
+			videointerface_addsource('1920x1080', '%CURRENTXML%/code/itinerario_1920_1080.mp4|%CURRENTXML%/code/itinerario_1920_1080.webm', '%CURRENTXML%/code/poster.jpg');
+			videointerface_addsource('3840x1920', '%CURRENTXML%/code/itinerario_3840_1920.mp4|%CURRENTXML%/code/itinerario_3840_1920.webm', '%CURRENTXML%/code/poster.jpg');
+
+			if(device.ios,
+				<!-- iOS Safari has a very slow 'video-to-webgl-texture' transfer, therefore use a low-res video by default -->
+				videointerface_play('1280x720');
+			  ,
+				videointerface_play('1920x1080');
+			  );
+		</action>
+
+<action name="ChangeVideoScene" devices="tablet"> 
+	ClearTimelines();
+		set(plugin[video].posterurl, calc:'video/%1-2k-poster.jpg');
+			videointerface_addsource('1280x720', '%CURRENTXML%/code/itinerario_1280_720.mp4|%CURRENTXML%/code/itinerario_1280_720.webm', '%CURRENTXML%/code/poster.jpg');
+			videointerface_addsource('1920x1080', '%CURRENTXML%/code/itinerario_1920_1080.mp4|%CURRENTXML%/code/itinerario_1920_1080.webm', '%CURRENTXML%/code/poster.jpg');
+			videointerface_addsource('3840x1920', '%CURRENTXML%/code/itinerario_3840_1920.mp4|%CURRENTXML%/code/itinerario_3840_1920.webm', '%CURRENTXML%/code/poster.jpg');
+
+			if(device.ios,
+				<!-- iOS Safari has a very slow 'video-to-webgl-texture' transfer, therefore use a low-res video by default -->
+				videointerface_play('1280x720');
+			  ,
+				videointerface_play('1920x1080');
+			  );
+		</action>
+
+<action name="ChangeVideoScene" devices="mobile"> 
+	ClearTimelines();
+		set(plugin[video].posterurl, calc:'video/%1-2k-poster.jpg');
+			videointerface_addsource('1280x720', '%CURRENTXML%/code/itinerario_1280_720.mp4|%CURRENTXML%/code/itinerario_1280_720.webm', '%CURRENTXML%/code/poster.jpg');
+			videointerface_addsource('1920x1080', '%CURRENTXML%/code/itinerario_1920_1080.mp4|%CURRENTXML%/code/itinerario_1920_1080.webm', '%CURRENTXML%/code/poster.jpg');
+			videointerface_addsource('3840x1920', '%CURRENTXML%/code/itinerario_3840_1920.mp4|%CURRENTXML%/code/itinerario_3840_1920.webm', '%CURRENTXML%/code/poster.jpg');
+
+			if(device.ios,
+				<!-- iOS Safari has a very slow 'video-to-webgl-texture' transfer, therefore use a low-res video by default -->
+				videointerface_play('1280x720');
+			  ,
+				videointerface_play('1920x1080');
+			  );
+		</action>
+
+</krpano>

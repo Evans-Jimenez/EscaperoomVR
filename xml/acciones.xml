@@ -1,0 +1,1732 @@
+<krpano>
+
+<action name="do_crop_animation" scope="local" args="framewidth, frameheight, framerate">
+		 <!--  define local variables  -->
+		calc(local.xframes, (caller.imagewidth /framewidth) BOR 0); calc(local.frames, xframes * ((caller.imageheight / frameheight) BOR 0)); def(local.frame, integer, 0);
+		<!--  set the first frame  -->
+		calc(caller.crop, '0|0|' + framewidth + '|' + frameheight);
+		<!--  do the animation  -->
+		setinterval(calc('crop_anim_' + caller.name), calc(5.0 / framerate), if(caller.loaded, inc(frame); if(frame GE frames, if(caller.onlastframe !== null, callwith(caller, onlastframe() ) ); set(frame,0); ); mod(xpos, frame, xframes); div(ypos, frame, xframes); Math.floor(ypos); mul(xpos, framewidth); mul(ypos, frameheight); calc(caller.crop, xpos + '|' + ypos + '|' + framewidth + '|' + frameheight); ,
+		<!--  stop the interval when the hotspot gets removed  -->
+		clearinterval(calc('crop_anim_' + caller.name)); ); );
+	</action>
+
+
+
+<action name="cierra">
+stop();
+set(visible,false);
+</action>
+
+
+
+
+
+
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  -->
+<!--               ACCIONES ESCENA INDICE  -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  -->
+
+	<action name="solodesktop">
+if(device.mobile OR device.tablet OR device.iphone,
+showtext(ATENCIÓN:La aplicación solo funciona bien en modo escritorio.[br]No está diseñada para dispositivos táctiles ni de pantalla pequeña,movil), 
+);
+
+
+</action>
+
+<action name="inicio">
+showtext(Proyecto de Innovación Docente CIRCE.[br] Recorrido Virtual 1: El Proyecto de Ejecución ,titulo);
+delayedcall(11.0,set(hotspot[introduccion].visible,true););
+);
+</action>
+
+<action name="oculta">
+set (visible,false);
+</action>
+
+
+<action name="goto">
+		skin_loadscene(%1, OPENBLEND(0.8, 0.0, 0.6, 0.3, easeOutQuad));
+</action>	
+
+
+<action name="muestra_indice">
+set(hotspot[hs1].visible,true);
+set(hotspot[hs2].visible,true);
+set(hotspot[hs3].visible,true);
+set(hotspot[hs1_1].visible,true);
+set(hotspot[hs2_1].visible,true);
+set(hotspot[hs3_1].visible,true);
+
+
+</action>
+
+
+
+<action name="muestra_indicerv">
+set(hotspot[hs1].visible,true);
+set(hotspot[hs2].visible,true);
+set(hotspot[hs3].visible,true);
+set(hotspot[hs1].scale,0.4);
+set(hotspot[hs2].scale,0.4);
+set(hotspot[hs3].scale,0.4);
+set(hotspot[hs1_1].visible,true);
+set(hotspot[hs2_1].visible,true);
+set(hotspot[hs3_1].visible,true);
+set(hotspot[hs1_1].scale,0.4);
+set(hotspot[hs2_1].scale,0.4);
+set(hotspot[hs3_1].scale,0.4);
+
+
+</action>
+
+<action name="muestra_indicemobile">
+set(hotspot[hs1].visible,true);
+set(hotspot[hs2].visible,true);
+set(hotspot[hs3].visible,true);
+set(hotspot[hs1].scale,0.6);
+set(hotspot[hs2].scale,0.6);
+set(hotspot[hs3].scale,0.6);
+set(hotspot[hs1_1].visible,true);
+set(hotspot[hs2_1].visible,true);
+set(hotspot[hs3_1].visible,true);
+set(hotspot[hs1_1].scale,0.6);
+set(hotspot[hs2_1].scale,0.6);
+set(hotspot[hs3_1].scale,0.6);
+
+</action>
+
+
+
+
+
+
+<action name="play_vyond1">
+
+callwith(hotspot[vyond1], play();););
+
+</action>
+
+<action name="play_vyond2">
+
+callwith(hotspot[vyond2], play();););
+
+</action>
+
+<action name="play_vyond3">
+
+callwith(hotspot[vyond3], play();););
+
+</action>
+
+<action name="play_vyond4">
+
+callwith(hotspot[vyond4], play();););
+
+</action>
+
+<action name="cierra">
+stop();
+set(visible,false);
+</action>
+
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  -->
+<!--               ACCIONES FLY  -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  -->
+
+
+
+<action name="fly_foto_in">
+			tween(alpha, 1 ,2);
+			tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|1',2, default, set(flying_state,'in'); set(capture,true); );
+	</action>
+	<action name="fly_foto_out">
+			tween(alpha, 0 ,2);
+			tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|0.1',2, default, set(flying_state,'out'); set(capture,true); );
+	</action>
+	<action name="fly_foto2_in">
+			tween(alpha, 1 ,2);
+			tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|0.4',2, default, set(flying_state,'in'); set(capture,true); );
+	</action>
+	<action name="fly_foto2_out">
+			tween(alpha, 0 ,2);
+			tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|0.1',2, default, set(flying_state,'out'); set(capture,true); );
+	</action>
+	
+	
+		<action name="fly_foto3_in">
+			tween(alpha, 1 ,2);
+			tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|0.5',2, default, set(flying_state,'in'); set(capture,true); );
+	</action>
+	<action name="fly_foto3_out">
+			tween(alpha, 0 ,3);
+			tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|0.1',2, default, set(flying_state,'out'); set(capture,true); );
+	</action>
+	
+	
+	
+	
+	
+	<action name="flyout_hotspot">
+		for(set(i,0), i LT hotspot.count, inc(i),
+			copy(hs, hotspot[get(i)]);
+			if(hs.name != name AND hs.style == 'flyoutimage' AND (hs.flying_state == 'out' OR hs.flying_state == 'flyingout'),
+				callwith(hs, flyout_hotspot() );
+			  );
+		  );
+
+		if(flying_state == 'flyingout',
+			set(flying_state, 'flyingin');
+		  ,
+			if(flying_state == 'flyingin',
+				set(flying_state, 'flyingout');
+		  	  );
+		  );
+
+		if(flying_state == 'in',
+			calc(backup_state, '0.0|' + rx + '|' + ry + '|' + rz + '|' + scale);
+			copy(backup_zorder, zorder);
+			set(flying_state, 'flyingout');
+		  );
+
+		if(flying_state == 'out',
+			set(flying_state, 'flyingin');
+		  );
+
+		if(flying_state == 'flyingout',
+			set(zorder, 99);
+			tween(alpha, 1,2);
+						tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|1',2, default, set(flying_state,'out'); set(capture,true);
+			
+			
+			);
+			
+		  );
+		 	 if(flying_state == 'flyingout' AND webvr.isenabled,
+			set(zorder, 99);
+			tween(alpha, 1 ,2);
+			tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|0.5',2, default, set(flying_state,'in'); set(capture,true); );		
+		  delayedcall(6.0, set(visible, false); );
+		  );
+
+		if(flying_state == 'flyingin',
+			sub(zorder,1);
+			tween(alpha, 0 ,2);
+			set(capture,false);
+			tween(flying|rx|ry|rz|scale, get(backup_state), 1, default, set(flying_state,'in'); copy(zorder,backup_zorder); );
+		  );
+		 if(flying_state == 'flyingin' AND webvr.isenabled,
+			sub(zorder,1);
+			tween(alpha, 0 ,2);
+			set(capture,false);
+			tween(flying|rx|ry|rz|scale, get(backup_state), 1, default, set(flying_state,'in'); copy(zorder,backup_zorder); );
+		  );
+		  
+		  
+		  	 if(flying_state == 'flyingout' AND device.mobile == true,
+			set(zorder, 99);
+			tween(alpha, 1 ,2);
+			tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|0.5',2, default, set(flying_state,'in'); set(capture,true); );		
+		  delayedcall(6.0, set(visible, false); );
+		  );
+
+		if(flying_state == 'flyingin',
+			sub(zorder,1);
+			tween(alpha, 0 ,2);
+			set(capture,false);
+			tween(flying|rx|ry|rz|scale, get(backup_state), 1, default, set(flying_state,'in'); copy(zorder,backup_zorder); );
+		  );
+		 if(flying_state == 'flyingin' AND device.mobile == true,
+			sub(zorder,1);
+			tween(alpha, 0 ,2);
+			set(capture,false);
+			tween(flying|rx|ry|rz|scale, get(backup_state), 1, default, set(flying_state,'in'); copy(zorder,backup_zorder); );
+		  );
+		  
+		  
+		  
+		  
+		  
+		  
+	    </action>
+		
+		
+		
+	<action name="comienza_carrusel_hs1">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios1, audios/hs1.mp3); 
+		delayedcall(0.1,set (hotspot[hs1].visible,false););
+		delayedcall(0.1,set (hotspot[hs2].visible,false););
+		delayedcall(0.1,set (hotspot[hs3].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs1/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(11,fly_foto_out(););
+		delayedcall(13,set (url,recursos/hs1/2.png););
+		delayedcall(13,fly_foto_in(););
+		delayedcall(25,fly_foto_out(););
+		delayedcall(27,set (url,recursos/hs1/3.png););
+		delayedcall(27,fly_foto_in(););
+		delayedcall(41,fly_foto_out(););
+		delayedcall(41,stopallsounds(););
+		delayedcall(43, loadscene (scene_13););
+		delayedcall(43,set (hotspot[hs1].visible,true););
+		delayedcall(43,set (hotspot[hs2].visible,true););
+		delayedcall(43,set (hotspot[hs3].visible,true););
+		delayedcall(43,set (hotspot[hs1_1].visible,true););
+		delayedcall(43,set (hotspot[hs2_1].visible,true););
+		delayedcall(43,set (hotspot[hs3_1].visible,true););
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios1, audios/hs1.mp3) ;
+		delayedcall(0.1,set (hotspot[hs1].visible,false););
+		delayedcall(0.1,set (hotspot[hs2].visible,false););
+		delayedcall(0.1,set (hotspot[hs3].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs1/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(11,fly_foto2_out(););
+		delayedcall(13,set (url,recursos/hs1/2.png););
+		delayedcall(13,fly_foto2_in(););
+		delayedcall(25,fly_foto2_out(););
+		delayedcall(27,set (url,recursos/hs1/3.png););
+		delayedcall(27,fly_foto2_in(););
+		delayedcall(41,fly_foto2_out(););
+		delayedcall(41,stopallsounds(););
+		delayedcall(43, loadscene (scene_13););
+		delayedcall(43,set (hotspot[hs1].visible,true););
+		delayedcall(43,set (hotspot[hs2].visible,true););
+		delayedcall(43,set (hotspot[hs3].visible,true););
+		delayedcall(43,set (hotspot[hs1_1].visible,true););
+		delayedcall(43,set (hotspot[hs2_1].visible,true););
+		delayedcall(43,set (hotspot[hs3_1].visible,true););
+			);
+			
+			if( webvr.isenabled==false AND device.mobile==true,	
+		desactiva();
+		stopallsounds();
+		playsound (audios1, audios/hs1.mp3) ;
+		delayedcall(0.1,set (hotspot[hs1].visible,false););
+		delayedcall(0.1,set (hotspot[hs2].visible,false););
+		delayedcall(0.1,set (hotspot[hs3].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs1/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(11,fly_foto3_out(););
+		delayedcall(13,set (url,recursos/hs1/2.png););
+		delayedcall(13,fly_foto3_in(););
+		delayedcall(25,fly_foto3_out(););
+		delayedcall(27,set (url,recursos/hs1/3.png););
+		delayedcall(27,fly_foto3_in(););
+		delayedcall(41,fly_foto3_out(););
+		delayedcall(41,stopallsounds(););
+		delayedcall(43, loadscene (scene_13););
+		delayedcall(43,set (hotspot[hs1].visible,true););
+		delayedcall(43,set (hotspot[hs2].visible,true););
+		delayedcall(43,set (hotspot[hs3].visible,true););
+		delayedcall(43,set (hotspot[hs1_1].visible,true););
+		delayedcall(43,set (hotspot[hs2_1].visible,true););
+		delayedcall(43,set (hotspot[hs3_1].visible,true););
+			);
+	</action>   
+	   
+	   
+	  	   
+	   
+	   
+	   
+	   
+<action name="comienza_carrusel_hs2">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios2, audios/hs2.mp3) ;
+		delayedcall(0.1,set (hotspot[hs1].visible,false););
+		delayedcall(0.1,set (hotspot[hs2].visible,false););
+		delayedcall(0.1,set (hotspot[hs3].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs2/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(87,fly_foto_out(););
+		delayedcall(89, loadscene (scene_13););
+		delayedcall(89,stopallsounds(););
+		delayedcall(91,set (hotspot[hs1].visible,true););
+		delayedcall(91,set (hotspot[hs2].visible,true););
+		delayedcall(91,set (hotspot[hs3].visible,true););
+		delayedcall(91,set (hotspot[hs1_1].visible,true););
+		delayedcall(91,set (hotspot[hs2_1].visible,true););
+		delayedcall(91,set (hotspot[hs3_1].visible,true););
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios2, audios/hs2.mp3) ;
+		delayedcall(0.1,set (hotspot[hs1].visible,false););
+		delayedcall(0.1,set (hotspot[hs2].visible,false););
+		delayedcall(0.1,set (hotspot[hs3].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs2/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(87,fly_foto2_out(););
+		delayedcall(89, loadscene (scene_13););
+		delayedcall(89,stopallsounds(););
+		delayedcall(91,set (hotspot[hs1].visible,true););
+		delayedcall(91,set (hotspot[hs2].visible,true););
+		delayedcall(91,set (hotspot[hs3].visible,true););
+		delayedcall(91,set (hotspot[hs1_1].visible,true););
+		delayedcall(91,set (hotspot[hs2_1].visible,true););
+		delayedcall(91,set (hotspot[hs3_1].visible,true););
+			);
+			
+			if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios2, audios/hs2.mp3) ;
+		delayedcall(0.1,set (hotspot[hs1].visible,false););
+		delayedcall(0.1,set (hotspot[hs2].visible,false););
+		delayedcall(0.1,set (hotspot[hs3].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs2/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(87,fly_foto3_out(););
+		delayedcall(89, loadscene (scene_13););
+		delayedcall(89,stopallsounds(););
+		delayedcall(91,set (hotspot[hs1].visible,true););
+		delayedcall(91,set (hotspot[hs2].visible,true););
+		delayedcall(91,set (hotspot[hs3].visible,true););
+		delayedcall(91,set (hotspot[hs1_1].visible,true););
+		delayedcall(91,set (hotspot[hs2_1].visible,true););
+		delayedcall(91,set (hotspot[hs3_1].visible,true););
+			);
+			
+			
+			
+	</action>   	   
+	   
+	   <action name="comienza_carrusel_hs3">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs1].visible,false););
+		delayedcall(0.1,set (hotspot[hs2].visible,false););
+		delayedcall(0.1,set (hotspot[hs3].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs3/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(7,fly_foto_out(););
+		delayedcall(9,set (url,recursos/hs3/2.png););
+		delayedcall(9,fly_foto_in(););
+		delayedcall(16,fly_foto_out(););
+		delayedcall(18,set (url,recursos/hs3/3.png););
+		delayedcall(18,fly_foto_in(););
+		delayedcall(26,fly_foto_out(););
+		delayedcall(28,set (url,recursos/hs3/4.png););
+		delayedcall(28,fly_foto_in(););
+		delayedcall(35,fly_foto_out(););
+		delayedcall(37, loadscene (scene_13););
+		delayedcall(37,stopallsounds(););
+		delayedcall(39,set (hotspot[hs1].visible,true););
+		delayedcall(39,set (hotspot[hs2].visible,true););
+		delayedcall(39,set (hotspot[hs3].visible,true););
+		delayedcall(39,set (hotspot[hs1_1].visible,true););
+		delayedcall(39,set (hotspot[hs2_1].visible,true););
+		delayedcall(39,set (hotspot[hs3_1].visible,true););
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs1].visible,false););
+		delayedcall(0.1,set (hotspot[hs2].visible,false););
+		delayedcall(0.1,set (hotspot[hs3].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs3/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(7,fly_foto2_out(););
+		delayedcall(9,set (url,recursos/hs3/2.png););
+		delayedcall(9,fly_foto2_in(););
+		delayedcall(16,fly_foto2_out(););
+		delayedcall(18,set (url,recursos/hs3/3.png););
+		delayedcall(18,fly_foto2_in(););
+		delayedcall(26,fly_foto2_out(););
+		delayedcall(28,set (url,recursos/hs3/4.png););
+		delayedcall(28,fly_foto2_in(););
+		delayedcall(35,fly_foto2_out(););
+		delayedcall(37, loadscene (scene_13););
+		delayedcall(37,stopallsounds(););
+		delayedcall(39,set (hotspot[hs1].visible,true););
+		delayedcall(39,set (hotspot[hs2].visible,true););
+		delayedcall(39,set (hotspot[hs3].visible,true););
+		delayedcall(39,set (hotspot[hs1_1].visible,true););
+		delayedcall(39,set (hotspot[hs2_1].visible,true););
+		delayedcall(39,set (hotspot[hs3_1].visible,true););
+			);
+			
+			
+			if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs1].visible,false););
+		delayedcall(0.1,set (hotspot[hs2].visible,false););
+		delayedcall(0.1,set (hotspot[hs3].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs3/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(7,fly_foto3_out(););
+		delayedcall(9,set (url,recursos/hs3/2.png););
+		delayedcall(9,fly_foto3_in(););
+		delayedcall(16,fly_foto3_out(););
+		delayedcall(18,set (url,recursos/hs3/3.png););
+		delayedcall(18,fly_foto3_in(););
+		delayedcall(26,fly_foto3_out(););
+		delayedcall(28,set (url,recursos/hs3/4.png););
+		delayedcall(28,fly_foto3_in(););
+		delayedcall(35,fly_foto3_out(););
+		delayedcall(37, loadscene (scene_13););
+		delayedcall(37,stopallsounds(););
+		delayedcall(39,set (hotspot[hs1].visible,true););
+		delayedcall(39,set (hotspot[hs2].visible,true););
+		delayedcall(39,set (hotspot[hs3].visible,true););
+		delayedcall(39,set (hotspot[hs1_1].visible,true););
+		delayedcall(39,set (hotspot[hs2_1].visible,true););
+		delayedcall(39,set (hotspot[hs3_1].visible,true););
+			);
+			
+			
+	</action>  
+
+<action name="comienza_carrusel_hs4">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios4, audios/hs4.mp3); 
+		delayedcall(0.1,set (hotspot[hs4].visible,false););
+		delayedcall(0.1,set (hotspot[hs5].visible,false););
+		delayedcall(0.1,set (hotspot[hs14].visible,false););
+		delayedcall(0.1,set (hotspot[hs5_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs14_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs4/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(10,fly_foto_out(););
+		delayedcall(12,set (url,recursos/hs4/2.png););
+		delayedcall(12,fly_foto_in(););
+		delayedcall(22,fly_foto_out(););
+		delayedcall(24,set (url,recursos/hs4/3.png););
+		delayedcall(24,fly_foto_in(););
+		delayedcall(34,fly_foto_out(););
+		delayedcall(36,set (url,recursos/hs4/4.png););
+		delayedcall(36,fly_foto_in(););
+		delayedcall(46,fly_foto_out(););
+		delayedcall(48,set (url,recursos/hs4/5.png););
+		delayedcall(48,fly_foto_in(););
+		delayedcall(58,fly_foto_out(););
+		delayedcall(60,set (url,recursos/hs4/6.png););
+		delayedcall(60,fly_foto_in(););
+		delayedcall(70,fly_foto_out(););
+		delayedcall(72,set (url,recursos/hs4/7.png););
+		delayedcall(72,fly_foto_in(););
+		delayedcall(82,fly_foto_out(););
+		delayedcall(84,set (url,recursos/hs4/8.png););
+		delayedcall(84,fly_foto_in(););
+		delayedcall(94,fly_foto_out(););
+		delayedcall(96,set (url,recursos/hs4/9.png););
+		delayedcall(96,fly_foto_in(););
+		delayedcall(106,fly_foto_out(););
+		delayedcall(108,stopallsounds(););
+		delayedcall(108, loadscene (scene_2););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios4, audios/hs4.mp3); 
+		delayedcall(0.1,set (hotspot[hs4].visible,false););
+		delayedcall(0.1,set (hotspot[hs5].visible,false););
+		delayedcall(0.1,set (hotspot[hs14].visible,false););
+		delayedcall(0.1,set (hotspot[hs5_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs14_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs4/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(10,fly_foto2_out(););
+		delayedcall(12,set (url,recursos/hs4/2.png););
+		delayedcall(12,fly_foto2_in(););
+		delayedcall(22,fly_foto2_out(););
+		delayedcall(24,set (url,recursos/hs4/3.png););
+		delayedcall(24,fly_foto2_in(););
+		delayedcall(34,fly_foto2_out(););
+		delayedcall(36,set (url,recursos/hs4/4.png););
+		delayedcall(36,fly_foto2_in(););
+		delayedcall(46,fly_foto2_out(););
+		delayedcall(48,set (url,recursos/hs4/5.png););
+		delayedcall(48,fly_foto2_in(););
+		delayedcall(58,fly_foto2_out(););
+		delayedcall(60,set (url,recursos/hs4/6.png););
+		delayedcall(60,fly_foto2_in(););
+		delayedcall(70,fly_foto2_out(););
+		delayedcall(72,set (url,recursos/hs4/7.png););
+		delayedcall(72,fly_foto2_in(););
+		delayedcall(82,fly_foto2_out(););
+		delayedcall(84,set (url,recursos/hs4/8.png););
+		delayedcall(84,fly_foto2_in(););
+		delayedcall(94,fly_foto2_out(););
+		delayedcall(96,set (url,recursos/hs4/9.png););
+		delayedcall(96,fly_foto2_in(););
+		delayedcall(106,fly_foto2_out(););
+		delayedcall(108,stopallsounds(););
+		delayedcall(108, loadscene (scene_2););
+
+			);
+			
+			if( webvr.isenabled==false AND device.mobile==true,	
+		desactiva();
+		stopallsounds();
+		playsound (audios4, audios/hs4.mp3); 
+		delayedcall(0.1,set (hotspot[hs4].visible,false););
+		delayedcall(0.1,set (hotspot[hs5].visible,false););
+		delayedcall(0.1,set (hotspot[hs14].visible,false););
+		delayedcall(0.1,set (hotspot[hs5_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs14_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs4/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(10,fly_foto3_out(););
+		delayedcall(12,set (url,recursos/hs4/2.png););
+		delayedcall(12,fly_foto3_in(););
+		delayedcall(22,fly_foto3_out(););
+		delayedcall(24,set (url,recursos/hs4/3.png););
+		delayedcall(24,fly_foto3_in(););
+		delayedcall(34,fly_foto3_out(););
+		delayedcall(36,set (url,recursos/hs4/4.png););
+		delayedcall(36,fly_foto3_in(););
+		delayedcall(46,fly_foto3_out(););
+		delayedcall(48,set (url,recursos/hs4/5.png););
+		delayedcall(48,fly_foto3_in(););
+		delayedcall(58,fly_foto3_out(););
+		delayedcall(60,set (url,recursos/hs4/6.png););
+		delayedcall(60,fly_foto3_in(););
+		delayedcall(70,fly_foto3_out(););
+		delayedcall(72,set (url,recursos/hs4/7.png););
+		delayedcall(72,fly_foto3_in(););
+		delayedcall(82,fly_foto3_out(););
+		delayedcall(84,set (url,recursos/hs4/8.png););
+		delayedcall(84,fly_foto3_in(););
+		delayedcall(94,fly_foto3_out(););
+		delayedcall(96,set (url,recursos/hs4/9.png););
+		delayedcall(96,fly_foto3_in(););
+		delayedcall(106,fly_foto3_out(););
+		delayedcall(108,stopallsounds(););
+		delayedcall(108, loadscene (scene_2););
+
+			);
+			
+	</action>   
+	
+	 <action name="comienza_carrusel_hs5">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs4].visible,false););
+		delayedcall(0.1,set (hotspot[hs5].visible,false););
+		delayedcall(0.1,set (hotspot[hs14].visible,false););
+		delayedcall(0.1,set (hotspot[hs4_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs14_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs5/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(7,fly_foto_out(););
+		delayedcall(9,set (url,recursos/hs5/2.png););
+		delayedcall(9,fly_foto_in(););
+		delayedcall(16,fly_foto_out(););
+		delayedcall(18,set (url,recursos/hs5/3.png););
+		delayedcall(18,fly_foto_in(););
+		delayedcall(26,fly_foto_out(););
+		delayedcall(28,set (url,recursos/hs5/4.png););
+		delayedcall(28,fly_foto_in(););
+		delayedcall(35,fly_foto_out(););
+		delayedcall(37,set (url,recursos/hs5/5.png););
+		delayedcall(37,fly_foto_in(););
+		delayedcall(44,fly_foto_out(););
+		delayedcall(46, loadscene (scene_2););
+		delayedcall(46,stopallsounds(););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs4].visible,false););
+		delayedcall(0.1,set (hotspot[hs5].visible,false););
+		delayedcall(0.1,set (hotspot[hs14].visible,false););
+		delayedcall(0.1,set (hotspot[hs4_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs14_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs5/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(7,fly_foto2_out(););
+		delayedcall(9,set (url,recursos/hs5/2.png););
+		delayedcall(9,fly_foto2_in(););
+		delayedcall(16,fly_foto2_out(););
+		delayedcall(18,set (url,recursos/hs5/3.png););
+		delayedcall(18,fly_foto2_in(););
+		delayedcall(26,fly_foto2_out(););
+		delayedcall(28,set (url,recursos/hs5/4.png););
+		delayedcall(28,fly_foto2_in(););
+		delayedcall(35,fly_foto2_out(););
+		delayedcall(37,set (url,recursos/hs5/5.png););
+		delayedcall(37,fly_foto2_in(););
+		delayedcall(44,fly_foto2_out(););
+		delayedcall(46, loadscene (scene_2););
+		delayedcall(46,stopallsounds(););
+
+			);
+			
+			if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs4].visible,false););
+		delayedcall(0.1,set (hotspot[hs5].visible,false););
+		delayedcall(0.1,set (hotspot[hs14].visible,false););
+		delayedcall(0.1,set (hotspot[hs4_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs14_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs5/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(7,fly_foto3_out(););
+		delayedcall(9,set (url,recursos/hs5/2.png););
+		delayedcall(9,fly_foto3_in(););
+		delayedcall(16,fly_foto3_out(););
+		delayedcall(18,set (url,recursos/hs5/3.png););
+		delayedcall(18,fly_foto3_in(););
+		delayedcall(26,fly_foto3_out(););
+		delayedcall(28,set (url,recursos/hs5/4.png););
+		delayedcall(28,fly_foto3_in(););
+		delayedcall(35,fly_foto3_out(););
+		delayedcall(37,set (url,recursos/hs5/5.png););
+		delayedcall(37,fly_foto3_in(););
+		delayedcall(44,fly_foto3_out(););
+		delayedcall(46, loadscene (scene_2););
+		delayedcall(46,stopallsounds(););
+
+			);
+			
+			
+			
+	</action>  
+
+<action name="comienza_carrusel_hs6">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios6, audios/hs6.mp3); 
+		delayedcall(0.1,set (hotspot[hs6].visible,false););
+		delayedcall(0.1,set (hotspot[hs7].visible,false););
+		delayedcall(0.1,set (hotspot[hs15].visible,false););
+		delayedcall(0.1,set (hotspot[hs7_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs15_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs6/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(14,fly_foto_out(););
+		delayedcall(16,set (url,recursos/hs6/2.png););
+		delayedcall(16,fly_foto_in(););
+		delayedcall(41,fly_foto_out(););
+		delayedcall(43,stopallsounds(););
+		delayedcall(43, loadscene (scene_5););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios6, audios/hs6.mp3); 
+		delayedcall(0.1,set (hotspot[hs6].visible,false););
+		delayedcall(0.1,set (hotspot[hs7].visible,false););
+		delayedcall(0.1,set (hotspot[hs15].visible,false););
+		delayedcall(0.1,set (hotspot[hs7_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs15_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs6/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(14,fly_foto2_out(););
+		delayedcall(16,set (url,recursos/hs6/2.png););
+		delayedcall(16,fly_foto2_in(););
+		delayedcall(41,fly_foto2_out(););
+		delayedcall(43,stopallsounds(););
+		delayedcall(43, loadscene (scene_5););
+
+			);
+			
+		if( webvr.isenabled==false AND device.mobile==true,	
+		desactiva();
+		stopallsounds();
+		playsound (audios6, audios/hs6.mp3); 
+		delayedcall(0.1,set (hotspot[hs6].visible,false););
+		delayedcall(0.1,set (hotspot[hs7].visible,false););
+		delayedcall(0.1,set (hotspot[hs15].visible,false););
+		delayedcall(0.1,set (hotspot[hs7_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs15_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs6/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(14,fly_foto3_out(););
+		delayedcall(16,set (url,recursos/hs6/2.png););
+		delayedcall(16,fly_foto3_in(););
+		delayedcall(41,fly_foto3_out(););
+		delayedcall(43,stopallsounds(););
+		delayedcall(43, loadscene (scene_5););
+
+			);	
+			
+			
+			
+			
+	</action>   
+	
+	 <action name="comienza_carrusel_hs7">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs6].visible,false););
+		delayedcall(0.1,set (hotspot[hs7].visible,false););
+		delayedcall(0.1,set (hotspot[hs15].visible,false););
+		delayedcall(0.1,set (hotspot[hs6_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs15_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs7/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(7,fly_foto_out(););
+		delayedcall(9,set (url,recursos/hs7/2.png););
+		delayedcall(9,fly_foto_in(););
+		delayedcall(16,fly_foto_out(););
+		delayedcall(18, loadscene (scene_5););
+		delayedcall(18,stopallsounds(););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs6].visible,false););
+		delayedcall(0.1,set (hotspot[hs7].visible,false););
+		delayedcall(0.1,set (hotspot[hs15].visible,false););
+		delayedcall(0.1,set (hotspot[hs6_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs15_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs7/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(7,fly_foto2_out(););
+		delayedcall(9,set (url,recursos/hs7/2.png););
+		delayedcall(9,fly_foto2_in(););
+		delayedcall(16,fly_foto2_out(););
+		delayedcall(18, loadscene (scene_5););
+		delayedcall(18,stopallsounds(););
+
+			);
+			
+			if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs6].visible,false););
+		delayedcall(0.1,set (hotspot[hs7].visible,false););
+		delayedcall(0.1,set (hotspot[hs15].visible,false););
+		delayedcall(0.1,set (hotspot[hs6_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs15_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs7/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(7,fly_foto3_out(););
+		delayedcall(9,set (url,recursos/hs7/2.png););
+		delayedcall(9,fly_foto3_in(););
+		delayedcall(16,fly_foto3_out(););
+		delayedcall(18, loadscene (scene_5););
+		delayedcall(18,stopallsounds(););
+
+			);
+			
+			
+			
+	</action>  
+
+
+<action name="comienza_carrusel_hs8">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios8, audios/hs8.mp3); 
+		delayedcall(0.1,set (hotspot[hs8].visible,false););
+		delayedcall(0.1,set (hotspot[hs9].visible,false););
+		delayedcall(0.1,set (hotspot[hs9_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs8/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(20,fly_foto_out(););
+		delayedcall(22,set (url,recursos/hs8/2.png););
+		delayedcall(22,fly_foto_in(););
+		delayedcall(43,fly_foto_out(););
+		delayedcall(45,stopallsounds(););
+		delayedcall(45, loadscene (scene_6););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios8, audios/hs8.mp3); 
+		delayedcall(0.1,set (hotspot[hs8].visible,false););
+		delayedcall(0.1,set (hotspot[hs9].visible,false););
+		delayedcall(0.1,set (hotspot[hs9_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs8/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(20,fly_foto2_out(););
+		delayedcall(22,set (url,recursos/hs8/2.png););
+		delayedcall(22,fly_foto2_in(););
+		delayedcall(43,fly_foto2_out(););
+		delayedcall(45,stopallsounds(););
+		delayedcall(45, loadscene (scene_6););
+
+			);
+			
+			if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios8, audios/hs8.mp3); 
+		delayedcall(0.1,set (hotspot[hs8].visible,false););
+		delayedcall(0.1,set (hotspot[hs9].visible,false););
+		delayedcall(0.1,set (hotspot[hs9_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs8/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(20,fly_foto3_out(););
+		delayedcall(22,set (url,recursos/hs8/2.png););
+		delayedcall(22,fly_foto3_in(););
+		delayedcall(43,fly_foto3_out(););
+		delayedcall(45,stopallsounds(););
+		delayedcall(45, loadscene (scene_6););
+
+			);
+			
+			
+			
+			
+			
+	</action>   
+	
+	 <action name="comienza_carrusel_hs9">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs8].visible,false););
+		delayedcall(0.1,set (hotspot[hs9].visible,false););
+		delayedcall(0.1,set (hotspot[hs8_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs9/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(7,fly_foto_out(););
+		delayedcall(9,set (url,recursos/hs9/2.png););
+		delayedcall(9,fly_foto_in(););
+		delayedcall(16,fly_foto_out(););
+		delayedcall(18, loadscene (scene_6););
+		delayedcall(18,stopallsounds(););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs8].visible,false););
+		delayedcall(0.1,set (hotspot[hs9].visible,false););
+		delayedcall(0.1,set (hotspot[hs8_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs9/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(7,fly_foto2_out(););
+		delayedcall(9,set (url,recursos/hs9/2.png););
+		delayedcall(9,fly_foto2_in(););
+		delayedcall(16,fly_foto2_out(););
+		delayedcall(18, loadscene (scene_6););
+		delayedcall(18,stopallsounds(););
+
+			);
+			
+			if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs8].visible,false););
+		delayedcall(0.1,set (hotspot[hs9].visible,false););
+		delayedcall(0.1,set (hotspot[hs8_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs9/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(7,fly_foto3_out(););
+		delayedcall(9,set (url,recursos/hs9/2.png););
+		delayedcall(9,fly_foto3_in(););
+		delayedcall(16,fly_foto3_out(););
+		delayedcall(18, loadscene (scene_6););
+		delayedcall(18,stopallsounds(););
+
+			);
+	</action>  
+
+<action name="comienza_carrusel_hs10">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios10, audios/hs10.mp3); 
+		delayedcall(0.1,set (hotspot[hs10].visible,false););
+		delayedcall(0.1,set (hotspot[hs11].visible,false););
+		delayedcall(0.1,set (hotspot[hs11_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs10/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(15,fly_foto_out(););
+		delayedcall(17,set (url,recursos/hs10/2.png););
+		delayedcall(17,fly_foto_in(););
+		delayedcall(32,fly_foto_out(););
+		delayedcall(34,stopallsounds(););
+		delayedcall(34, loadscene (scene_8););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios10, audios/hs10.mp3); 
+		delayedcall(0.1,set (hotspot[hs10].visible,false););
+		delayedcall(0.1,set (hotspot[hs11].visible,false););
+		delayedcall(0.1,set (hotspot[hs11_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs10/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(15,fly_foto2_out(););
+		delayedcall(17,set (url,recursos/hs10/2.png););
+		delayedcall(17,fly_foto2_in(););
+		delayedcall(32,fly_foto2_out(););
+		delayedcall(34,stopallsounds(););
+		delayedcall(34, loadscene (scene_8););
+
+			);
+			
+			if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios10, audios/hs10.mp3); 
+		delayedcall(0.1,set (hotspot[hs10].visible,false););
+		delayedcall(0.1,set (hotspot[hs11].visible,false););
+		delayedcall(0.1,set (hotspot[hs11_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs10/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(15,fly_foto3_out(););
+		delayedcall(17,set (url,recursos/hs10/2.png););
+		delayedcall(17,fly_foto3_in(););
+		delayedcall(32,fly_foto3_out(););
+		delayedcall(34,stopallsounds(););
+		delayedcall(34, loadscene (scene_8););
+
+			);
+	</action>   
+	
+	 <action name="comienza_carrusel_hs11">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs10].visible,false););
+		delayedcall(0.1,set (hotspot[hs11].visible,false););
+		delayedcall(0.1,set (hotspot[hs10_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs11/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(6,fly_foto_out(););
+		delayedcall(8,set (url,recursos/hs11/2.png););
+		delayedcall(8,fly_foto_in(););
+		delayedcall(14,fly_foto_out(););
+		delayedcall(16,set (url,recursos/hs11/3.png););
+		delayedcall(16,fly_foto_in(););
+		delayedcall(22,fly_foto_out(););
+		delayedcall(24,set (url,recursos/hs11/4.png););
+		delayedcall(24,fly_foto_in(););
+		delayedcall(30,fly_foto_out(););
+		delayedcall(32,set (url,recursos/hs11/5.png););
+		delayedcall(32,fly_foto_in(););
+		delayedcall(38,fly_foto_out(););
+		delayedcall(40,set (url,recursos/hs11/6.png););
+		delayedcall(40,fly_foto_in(););
+		delayedcall(46,fly_foto_out(););
+		delayedcall(48, loadscene (scene_8););
+		delayedcall(48,stopallsounds(););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs10].visible,false););
+		delayedcall(0.1,set (hotspot[hs11].visible,false););
+		delayedcall(0.1,set (hotspot[hs10_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs11/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(6,fly_foto2_out(););
+		delayedcall(8,set (url,recursos/hs11/2.png););
+		delayedcall(8,fly_foto2_in(););
+		delayedcall(14,fly_foto2_out(););
+		delayedcall(16,set (url,recursos/hs11/3.png););
+		delayedcall(16,fly_foto2_in(););
+		delayedcall(22,fly_foto2_out(););
+		delayedcall(24,set (url,recursos/hs11/4.png););
+		delayedcall(24,fly_foto2_in(););
+		delayedcall(30,fly_foto2_out(););
+		delayedcall(32,set (url,recursos/hs11/5.png););
+		delayedcall(32,fly_foto2_in(););
+		delayedcall(38,fly_foto2_out(););
+		delayedcall(40,set (url,recursos/hs11/6.png););
+		delayedcall(40,fly_foto2_in(););
+		delayedcall(46,fly_foto2_out(););
+		delayedcall(48, loadscene (scene_8););
+		delayedcall(48,stopallsounds(););
+
+			);
+			
+			if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs10].visible,false););
+		delayedcall(0.1,set (hotspot[hs11].visible,false););
+		delayedcall(0.1,set (hotspot[hs10_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs11/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(6,fly_foto3_out(););
+		delayedcall(8,set (url,recursos/hs11/2.png););
+		delayedcall(8,fly_foto3_in(););
+		delayedcall(14,fly_foto3_out(););
+		delayedcall(16,set (url,recursos/hs11/3.png););
+		delayedcall(16,fly_foto3_in(););
+		delayedcall(22,fly_foto3_out(););
+		delayedcall(24,set (url,recursos/hs11/4.png););
+		delayedcall(24,fly_foto3_in(););
+		delayedcall(30,fly_foto3_out(););
+		delayedcall(32,set (url,recursos/hs11/5.png););
+		delayedcall(32,fly_foto3_in(););
+		delayedcall(38,fly_foto3_out(););
+		delayedcall(40,set (url,recursos/hs11/6.png););
+		delayedcall(40,fly_foto3_in(););
+		delayedcall(46,fly_foto3_out(););
+		delayedcall(48, loadscene (scene_8););
+		delayedcall(48,stopallsounds(););
+
+			);
+	</action>  
+
+<action name="comienza_carrusel_hs12">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios12, audios/hs12.mp3); 
+		delayedcall(0.1,set (hotspot[hs12].visible,false););
+		delayedcall(0.1,set (hotspot[hs13].visible,false););
+		delayedcall(0.1,set (hotspot[hs13_1].visible,false););
+
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs12/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(17,fly_foto_out(););
+		delayedcall(19,set (url,recursos/hs12/2.png););
+		delayedcall(19,fly_foto_in(););
+		delayedcall(37,fly_foto_out(););
+		delayedcall(39,stopallsounds(););
+		delayedcall(39, loadscene (scene_9););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios12, audios/hs12.mp3); 
+		delayedcall(0.1,set (hotspot[hs12].visible,false););
+		delayedcall(0.1,set (hotspot[hs13].visible,false););
+		delayedcall(0.1,set (hotspot[hs13_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs12/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(17,fly_foto2_out(););
+		delayedcall(19,set (url,recursos/hs12/2.png););
+		delayedcall(19,fly_foto2_in(););
+		delayedcall(37,fly_foto2_out(););
+		delayedcall(39,stopallsounds(););
+		delayedcall(39, loadscene (scene_9););
+
+			);
+			
+			if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios12, audios/hs12.mp3); 
+		delayedcall(0.1,set (hotspot[hs12].visible,false););
+		delayedcall(0.1,set (hotspot[hs13].visible,false););
+		delayedcall(0.1,set (hotspot[hs13_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs12/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(17,fly_foto3_out(););
+		delayedcall(19,set (url,recursos/hs12/2.png););
+		delayedcall(19,fly_foto3_in(););
+		delayedcall(37,fly_foto3_out(););
+		delayedcall(39,stopallsounds(););
+		delayedcall(39, loadscene (scene_9););
+
+			);
+	</action>   
+	
+	 <action name="comienza_carrusel_hs13">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs12].visible,false););
+		delayedcall(0.1,set (hotspot[hs13].visible,false););
+		delayedcall(0.1,set (hotspot[hs12_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs13/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(10,fly_foto_out(););
+		delayedcall(12, loadscene (scene_9););
+		delayedcall(12,stopallsounds(););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs12].visible,false););
+		delayedcall(0.1,set (hotspot[hs13].visible,false););
+		delayedcall(0.1,set (hotspot[hs12_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs13/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(10,fly_foto2_out(););
+		delayedcall(12, loadscene (scene_9););
+		delayedcall(12,stopallsounds(););
+
+			);	
+		if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs12].visible,false););
+		delayedcall(0.1,set (hotspot[hs13].visible,false););
+		delayedcall(0.1,set (hotspot[hs12_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs13/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(10,fly_foto3_out(););
+		delayedcall(12, loadscene (scene_9););
+		delayedcall(12,stopallsounds(););
+
+			);
+	</action>  
+
+<action name="comienza_carrusel_hs14">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios14, audios/hs14.mp3); 
+		delayedcall(0.1,set (hotspot[hs4].visible,false););
+		delayedcall(0.1,set (hotspot[hs5].visible,false););
+		delayedcall(0.1,set (hotspot[hs14].visible,false););
+		delayedcall(0.1,set (hotspot[hs4_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs5_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs14/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(28,fly_foto_out(););
+		delayedcall(30,set (url,recursos/hs14/2.png););
+		delayedcall(30,fly_foto_in(););
+		delayedcall(58,fly_foto_out(););
+		delayedcall(60,stopallsounds(););
+		delayedcall(60, loadscene (scene_2););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios14, audios/hs14.mp3); 
+		delayedcall(0.1,set (hotspot[hs4].visible,false););
+		delayedcall(0.1,set (hotspot[hs5].visible,false););
+		delayedcall(0.1,set (hotspot[hs14].visible,false););
+		delayedcall(0.1,set (hotspot[hs4_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs5_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs14/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(28,fly_foto2_out(););
+		delayedcall(30,set (url,recursos/hs14/2.png););
+		delayedcall(30,fly_foto2_in(););
+		delayedcall(58,fly_foto2_out(););
+		delayedcall(60,stopallsounds(););
+		delayedcall(60, loadscene (scene_2););
+
+			);
+		if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios14, audios/hs14.mp3); 
+		delayedcall(0.1,set (hotspot[hs4].visible,false););
+		delayedcall(0.1,set (hotspot[hs5].visible,false););
+		delayedcall(0.1,set (hotspot[hs14].visible,false););
+		delayedcall(0.1,set (hotspot[hs4_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs5_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs14/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(28,fly_foto3_out(););
+		delayedcall(30,set (url,recursos/hs14/2.png););
+		delayedcall(30,fly_foto3_in(););
+		delayedcall(58,fly_foto3_out(););
+		delayedcall(60,stopallsounds(););
+		delayedcall(60, loadscene (scene_2););
+
+			);
+	</action>   
+	
+	 <action name="comienza_carrusel_hs15">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs6].visible,false););
+		delayedcall(0.1,set (hotspot[hs7].visible,false););
+		delayedcall(0.1,set (hotspot[hs15].visible,false););
+		delayedcall(0.1,set (hotspot[hs6_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs7_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs15/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(6,fly_foto_out(););
+		delayedcall(8,set (url,recursos/hs15/2.png););
+		delayedcall(8,fly_foto_in(););
+		delayedcall(14,fly_foto_out(););
+		delayedcall(16,set (url,recursos/hs15/3.png););
+		delayedcall(16,fly_foto_in(););
+		delayedcall(22,fly_foto_out(););
+		delayedcall(24,set (url,recursos/hs15/4.png););
+		delayedcall(24,fly_foto_in(););
+		delayedcall(30,fly_foto_out(););
+		delayedcall(48, loadscene (scene_5););
+		delayedcall(48,stopallsounds(););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs6].visible,false););
+		delayedcall(0.1,set (hotspot[hs7].visible,false););
+		delayedcall(0.1,set (hotspot[hs15].visible,false););
+		delayedcall(0.1,set (hotspot[hs6_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs7_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs15/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(6,fly_foto2_out(););
+		delayedcall(8,set (url,recursos/hs15/2.png););
+		delayedcall(8,fly_foto2_in(););
+		delayedcall(14,fly_foto2_out(););
+		delayedcall(16,set (url,recursos/hs15/3.png););
+		delayedcall(16,fly_foto2_in(););
+		delayedcall(22,fly_foto2_out(););
+		delayedcall(24,set (url,recursos/hs15/4.png););
+		delayedcall(24,fly_foto2_in(););
+		delayedcall(30,fly_foto2_out(););
+		delayedcall(48, loadscene (scene_5););
+		delayedcall(48,stopallsounds(););
+
+			);
+		if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs6].visible,false););
+		delayedcall(0.1,set (hotspot[hs7].visible,false););
+		delayedcall(0.1,set (hotspot[hs15].visible,false););
+		delayedcall(0.1,set (hotspot[hs6_1].visible,false););
+		delayedcall(0.1,set (hotspot[hs7_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs15/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(6,fly_foto3_out(););
+		delayedcall(8,set (url,recursos/hs15/2.png););
+		delayedcall(8,fly_foto3_in(););
+		delayedcall(14,fly_foto3_out(););
+		delayedcall(16,set (url,recursos/hs15/3.png););
+		delayedcall(16,fly_foto3_in(););
+		delayedcall(22,fly_foto3_out(););
+		delayedcall(24,set (url,recursos/hs15/4.png););
+		delayedcall(24,fly_foto3_in(););
+		delayedcall(30,fly_foto3_out(););
+		delayedcall(48, loadscene (scene_5););
+		delayedcall(48,stopallsounds(););
+
+			);
+	</action>  
+
+
+<action name="comienza_carrusel_hs16">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios16, audios/hs16.mp3); 
+		delayedcall(0.1,set (hotspot[hs16].visible,false););
+		delayedcall(0.1,set (hotspot[hs17].visible,false););
+		delayedcall(0.1,set (hotspot[hs17_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs16/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(33,fly_foto_out(););
+		delayedcall(35,set (url,recursos/hs16/2.png););
+		delayedcall(35,fly_foto_in(););
+		delayedcall(69,fly_foto_out(););
+		delayedcall(71,stopallsounds(););
+		delayedcall(71, loadscene (scene_15););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios16, audios/hs16.mp3); 
+		delayedcall(0.1,set (hotspot[hs16].visible,false););
+		delayedcall(0.1,set (hotspot[hs17].visible,false););
+		delayedcall(0.1,set (hotspot[hs17_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs16/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(33,fly_foto2_out(););
+		delayedcall(35,set (url,recursos/hs16/2.png););
+		delayedcall(35,fly_foto2_in(););
+		delayedcall(69,fly_foto2_out(););
+		delayedcall(71,stopallsounds(););
+		delayedcall(71, loadscene (scene_15););
+
+			);
+		if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios16, audios/hs16.mp3); 
+		delayedcall(0.1,set (hotspot[hs16].visible,false););
+		delayedcall(0.1,set (hotspot[hs17].visible,false););
+		delayedcall(0.1,set (hotspot[hs17_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs16/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(33,fly_foto3_out(););
+		delayedcall(35,set (url,recursos/hs16/2.png););
+		delayedcall(35,fly_foto3_in(););
+		delayedcall(69,fly_foto3_out(););
+		delayedcall(71,stopallsounds(););
+		delayedcall(71, loadscene (scene_15););
+
+			);
+	</action>   
+	
+	 <action name="comienza_carrusel_hs17">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs16].visible,false););
+		delayedcall(0.1,set (hotspot[hs17].visible,false););
+		delayedcall(0.1,set (hotspot[hs16_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs17/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(6,fly_foto_out(););
+		delayedcall(8,set (url,recursos/hs17/2.png););
+		delayedcall(8,fly_foto_in(););
+		delayedcall(14,fly_foto_out(););
+		delayedcall(16,set (url,recursos/hs17/3.png););
+		delayedcall(16,fly_foto_in(););
+		delayedcall(22,fly_foto_out(););
+		delayedcall(24,set (url,recursos/hs17/4.png););
+		delayedcall(24,fly_foto_in(););
+		delayedcall(30,fly_foto_out(););
+		delayedcall(32,set (url,recursos/hs17/5.png););
+		delayedcall(32,fly_foto_in(););
+		delayedcall(38,fly_foto_out(););
+		delayedcall(42, loadscene (scene_15););
+		delayedcall(42,stopallsounds(););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs16].visible,false););
+		delayedcall(0.1,set (hotspot[hs17].visible,false););
+		delayedcall(0.1,set (hotspot[hs16_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs17/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(6,fly_foto2_out(););
+		delayedcall(8,set (url,recursos/hs17/2.png););
+		delayedcall(8,fly_foto2_in(););
+		delayedcall(14,fly_foto2_out(););
+		delayedcall(16,set (url,recursos/hs17/3.png););
+		delayedcall(16,fly_foto2_in(););
+		delayedcall(22,fly_foto2_out(););
+		delayedcall(24,set (url,recursos/hs17/4.png););
+		delayedcall(24,fly_foto2_in(););
+		delayedcall(30,fly_foto2_out(););
+		delayedcall(32,set (url,recursos/hs17/5.png););
+		delayedcall(32,fly_foto2_in(););
+		delayedcall(38,fly_foto2_out(););
+		delayedcall(42, loadscene (scene_15););
+		delayedcall(42,stopallsounds(););
+
+			);
+		if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs16].visible,false););
+		delayedcall(0.1,set (hotspot[hs17].visible,false););
+		delayedcall(0.1,set (hotspot[hs16_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs17/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(6,fly_foto3_out(););
+		delayedcall(8,set (url,recursos/hs17/2.png););
+		delayedcall(8,fly_foto3_in(););
+		delayedcall(14,fly_foto3_out(););
+		delayedcall(16,set (url,recursos/hs17/3.png););
+		delayedcall(16,fly_foto3_in(););
+		delayedcall(22,fly_foto3_out(););
+		delayedcall(24,set (url,recursos/hs17/4.png););
+		delayedcall(24,fly_foto3_in(););
+		delayedcall(30,fly_foto3_out(););
+		delayedcall(32,set (url,recursos/hs17/5.png););
+		delayedcall(32,fly_foto3_in(););
+		delayedcall(38,fly_foto3_out(););
+		delayedcall(42, loadscene (scene_15););
+		delayedcall(42,stopallsounds(););
+
+			);
+	</action> 
+
+
+<action name="comienza_carrusel_hs18">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios18, audios/hs18.mp3); 
+		delayedcall(0.1,set (hotspot[hs18].visible,false););
+		delayedcall(0.1,set (hotspot[hs19].visible,false););
+		delayedcall(0.1,set (hotspot[hs19_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs18/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(11,fly_foto_out(););
+		delayedcall(13,set (url,recursos/hs18/2.png););
+		delayedcall(13,fly_foto_in(););
+		delayedcall(24,fly_foto_out(););
+		delayedcall(26,set (url,recursos/hs18/3.png););
+		delayedcall(26,fly_foto_in(););
+		delayedcall(37,fly_foto_out(););
+		delayedcall(39,set (url,recursos/hs18/4.png););
+		delayedcall(39,fly_foto_in(););
+		delayedcall(50,fly_foto_out(););
+		delayedcall(52,set (url,recursos/hs18/5.png););
+		delayedcall(52,fly_foto_in(););
+		delayedcall(67,fly_foto_out(););
+		delayedcall(69,stopallsounds(););
+		delayedcall(69, loadscene (scene_16););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios18, audios/hs18.mp3); 
+		delayedcall(0.1,set (hotspot[hs18].visible,false););
+		delayedcall(0.1,set (hotspot[hs19].visible,false););
+		delayedcall(0.1,set (hotspot[hs19_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs18/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(11,fly_foto2_out(););
+		delayedcall(13,set (url,recursos/hs18/2.png););
+		delayedcall(13,fly_foto2_in(););
+		delayedcall(24,fly_foto2_out(););
+		delayedcall(26,set (url,recursos/hs18/3.png););
+		delayedcall(26,fly_foto2_in(););
+		delayedcall(37,fly_foto2_out(););
+		delayedcall(39,set (url,recursos/hs18/4.png););
+		delayedcall(39,fly_foto2_in(););
+		delayedcall(50,fly_foto2_out(););
+		delayedcall(52,set (url,recursos/hs18/5.png););
+		delayedcall(52,fly_foto2_in(););
+		delayedcall(67,fly_foto2_out(););
+		delayedcall(69,stopallsounds(););
+		delayedcall(69, loadscene (scene_16););
+
+			);
+		if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios18, audios/hs18.mp3); 
+		delayedcall(0.1,set (hotspot[hs18].visible,false););
+		delayedcall(0.1,set (hotspot[hs19].visible,false););
+		delayedcall(0.1,set (hotspot[hs19_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs18/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(11,fly_foto3_out(););
+		delayedcall(13,set (url,recursos/hs18/2.png););
+		delayedcall(13,fly_foto3_in(););
+		delayedcall(24,fly_foto3_out(););
+		delayedcall(26,set (url,recursos/hs18/3.png););
+		delayedcall(26,fly_foto3_in(););
+		delayedcall(37,fly_foto3_out(););
+		delayedcall(39,set (url,recursos/hs18/4.png););
+		delayedcall(39,fly_foto3_in(););
+		delayedcall(50,fly_foto3_out(););
+		delayedcall(52,set (url,recursos/hs18/5.png););
+		delayedcall(52,fly_foto3_in(););
+		delayedcall(67,fly_foto3_out(););
+		delayedcall(69,stopallsounds(););
+		delayedcall(69, loadscene (scene_16););
+
+			);
+	</action>   
+	
+	 <action name="comienza_carrusel_hs19">
+		if( webvr.isenabled==false,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs18].visible,false););
+		delayedcall(0.1,set (hotspot[hs19].visible,false););
+		delayedcall(0.1,set (hotspot[hs18_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs19/1.png););
+		delayedcall(0.1,fly_foto_in(););
+		delayedcall(7,fly_foto_out(););
+		delayedcall(9,set (url,recursos/hs19/2.png););
+		delayedcall(9,fly_foto_in(););
+		delayedcall(16,fly_foto_out(););
+		delayedcall(18, loadscene (scene_16););
+		delayedcall(18,stopallsounds(););
+
+
+
+
+		);
+		if( webvr.isenabled,	
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs18].visible,false););
+		delayedcall(0.1,set (hotspot[hs19].visible,false););
+		delayedcall(0.1,set (hotspot[hs18_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs19/1.png););
+		delayedcall(0.1,fly_foto2_in(););
+		delayedcall(7,fly_foto2_out(););
+		delayedcall(9,set (url,recursos/hs19/2.png););
+		delayedcall(9,fly_foto2_in(););
+		delayedcall(16,fly_foto2_out(););
+		delayedcall(18, loadscene (scene_16););
+		delayedcall(18,stopallsounds(););
+
+			);
+			
+			
+			if( webvr.isenabled==false AND device.mobile==true,		
+		desactiva();
+		stopallsounds();
+		playsound (audios3, audios/fondohs.mp3) ;
+		delayedcall(0.1,set (hotspot[hs18].visible,false););
+		delayedcall(0.1,set (hotspot[hs19].visible,false););
+		delayedcall(0.1,set (hotspot[hs18_1].visible,false););
+		delayedcall(0.1,set (alpha,0.1););
+		delayedcall(0.1,set (url,recursos/hs19/1.png););
+		delayedcall(0.1,fly_foto3_in(););
+		delayedcall(7,fly_foto3_out(););
+		delayedcall(9,set (url,recursos/hs19/2.png););
+		delayedcall(9,fly_foto3_in(););
+		delayedcall(16,fly_foto3_out(););
+		delayedcall(18, loadscene (scene_16););
+		delayedcall(18,stopallsounds(););
+
+			);
+	</action>  	
+
+</krpano>
+
+

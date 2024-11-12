@@ -1,0 +1,168 @@
+﻿<krpano  >
+	
+	
+	<include url="skin/loadinganimation.xml" />
+	<include url="skin/loadingpercenttext.xml" />
+	    <include url="creditos/creditos.xml" />
+
+<!-- <include url="toolbox/toolbox.xml" />  -->
+<include url="skin/videointerface.xml" /> 
+	
+	
+
+	
+	
+	
+	
+	<action name="startup" autorun="onstart">
+		
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(startscene), null, MERGE);
+		if(startactions !== null, startactions() );
+	</action>
+	<plugin name="soundinterface"
+	        url.flash="%SWFPATH%/plugins/soundinterface.swf"
+	        url.html5="%SWFPATH%/plugins/soundinterface.js"
+	        rootpath=""
+	        preload="true"
+	        keep="true"
+	        />
+	<action name="do_crop_animation" scope="local" args="framewidth, frameheight, framerate">
+		 <!--  define local variables  -->
+		calc(local.xframes, (caller.imagewidth /framewidth) BOR 0); calc(local.frames, xframes * ((caller.imageheight / frameheight) BOR 0)); def(local.frame, integer, 0);
+		<!--  set the first frame  -->
+		calc(caller.crop, '0|0|' + framewidth + '|' + frameheight);
+		<!--  do the animation  -->
+		setinterval(calc('crop_anim_' + caller.name), calc(1.0 / framerate), if(caller.loaded, inc(frame); if(frame GE frames, if(caller.onlastframe !== null, callwith(caller, onlastframe() ) ); set(frame,0); ); mod(xpos, frame, xframes); div(ypos, frame, xframes); Math.floor(ypos); mul(xpos, framewidth); mul(ypos, frameheight); calc(caller.crop, xpos + '|' + ypos + '|' + framewidth + '|' + frameheight); ,
+		<!--  stop the interval when the hotspot gets removed  -->
+		clearinterval(calc('crop_anim_' + caller.name)); ); );
+	</action>
+	<action name="add_video_sources">
+			videointerface_addsource('3840x1920', '%CURRENTXML%/code/temblor.mp4|%CURRENTXML%/code/temblor.webm', '%CURRENTXML%/code/poster.png');
+			
+			
+			<!-- videointerface_addsource('1280x640', '%CURRENTXML%/code/itinerario1_1280_640.mp4|%CURRENTXML%/code/itinerario1_1280_640.webm', '%CURRENTXML%/code/poster.png');
+			videointerface_addsource('1920x960', '%CURRENTXML%/code/itinerario1_1920_1080.mp4|%CURRENTXML%/code/itinerario1_1920_1080.webm', '%CURRENTXML%/code/poster.png'); -->
+			if(device.ios,
+				<!-- iOS Safari has a very slow 'video-to-webgl-texture' transfer, therefore use a low-res video by default -->
+				videointerface_play('3840x1920');
+			  ,
+				videointerface_play('3840x1920');
+			  );
+		</action>
+	
+<action name="Mostrarhotspot">
+
+callwhen(plugin[video].time GT 000, set(hotspot[continuar].visible,false);); 
+callwhen(plugin[video].time GT 034, set(hotspot[continuar].visible,true); );
+
+
+
+		
+		</action>
+
+	
+	  <plugin name="soundinterface"
+	        url.flash="%SWFPATH%/plugins/soundinterface.swf"
+	        url.html5="%SWFPATH%/plugins/soundinterface.js"
+	        rootpath=""
+	        preload="true"
+	        keep="false"
+	        volume="1.0"
+            mute="false"
+	        />
+	
+	
+	
+	
+	<scene name="videopano" title="" isvideopano="true" onstart="stopallsounds();" >
+
+
+
+		<hotspot name="continuar" distorted="false" visible="false"  handcursor="true" url="recursos/continuar.png" scale="0.5" flying="1"  ath="-45.65800842916212" atv="-11.060885995661728"  
+		onclick="loadpanoscene(tour.xml, escena2);"  />  
+
+
+<events name="currentpano"
+	        
+					
+	        onnewpano="playsound(audio1, 'recursos/audio1.mp3', 1;"
+	        />
+		
+
+	
+	
+			<style name="skin_hotspotstyle" url="plugins/vtourskin_hotspot.png" scale="0.5" edge="top" distorted="false"
+	       tooltip=""
+	       linkedscene=""
+	       linkedscene_lookat=""
+	       onclick="skin_hotspotstyle_click();"
+	       onover="tween(scale,0.8);"
+	       onout="tween(scale,0.5);"
+	       onloaded="if(linkedscene AND skin_settings.tooltips_hotspots, copy(tooltip,scene[get(linkedscene)].title); loadstyle(skin_tooltips); );"
+	       />
+		
+		<!-- include the videoplayer interface / skin (with VR support) -->
+		<include url="skin/videointerface.xml" />
+		
+		<!-- include the videoplayer plugin -->
+		<plugin name="video"
+		        url.html5="%SWFPATH%/plugins/videoplayer.js"
+		        url.flash="%SWFPATH%/plugins/videoplayer.swf"
+		        pausedonstart="false"
+				loop="false"
+		        volume="0.0"
+				onvideopaused="pausarTodosHotspots();"
+		        onloaded="add_video_sources(); Mostrarhotspot();"
+		/>
+
+		<!-- use the videoplayer plugin as panoramic image source -->
+		<image>
+			<sphere url="plugin:video" />
+		</image>
+
+		<!-- set the default view -->
+		<view architectural="1.0" hlookat="-45" vlookat="8" fovtype="DFOV" fov="150" fovmin="75" fovmax="150" distortion="0.0"/>
+
+		<!-- add the video sources and play the video -->
+		
+		
+<action name="toggleHotspotVisibility">
+			for(set(i,0), i LT hotspot.count, inc(i),
+				set(hotspot[get(i)].visible, %1);
+			);
+		</action>
+		
+	
+		
+	
+		
+		<action name="pausarTodosHotspots">
+			for(set(i,0), i LT hotspot.count, inc(i),
+				if(hotspot[get(i)].visible,hotspot[get(i)].pause(););
+			);
+		</action>
+		
+	
+		
+	
+		
+
+
+		
+	
+
+				
+
+
+
+
+				
+	</scene>
+	
+	
+
+	
+	
+
+</krpano>

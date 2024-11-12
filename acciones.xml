@@ -1,0 +1,317 @@
+<krpano>
+
+<action name="cierra">
+stop();
+set(visible,false);
+</action>
+
+<action name="oculta">
+set (visible,false);
+</action>
+
+<action name="resta" >
+add(contador2,2);
+set(layer[contadortx2].html, calc(contador2));
+</action>
+
+<action name="suma" >
+add(contador1,2);
+set(layer[contadortx1].html, calc(contador1));
+set(enabled, false);
+</action>
+
+<action name="suma0" >
+add(contador3,0);
+set(layer[contadort1x1].html, calc(contador3));
+set(enabled, false);
+</action>
+<action name="suma1" >
+add(contador3,1);
+set(layer[contadort1x1].html, calc(contador3));
+set(enabled, false);
+</action>
+<action name="suma2" >
+add(contador3,2);
+set(layer[contadort1x1].html, calc(contador3));
+set(enabled, false);
+</action>
+
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  -->
+<!--               ACCIONES PRIMERA ESCENA  -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  -->
+
+<action name="solodesktop">
+if(device.mobile OR device.tablet OR device.iphone,
+showtext(ATENCIÓN:La aplicación solo funciona bien en modo escritorio.[br]No está diseñada para dispositivos táctiles ni de pantalla pequeña,movil),
+);
+</action>
+
+
+<action name="inicio">
+showtext(Técnicas de extracción avanzadas [br]en el laboratorio virtual,titulo);
+delayedcall(10.0,set(hotspot[boton_video_explicativo_quechers].visible,true););
+delayedcall(10.0,set(hotspot[boton_video_explicativo_UAE].visible,true););
+delayedcall(10.0,set(hotspot[boton_video_explicativo_PLE].visible,true););
+delayedcall(10.0,set(hotspot[boton_video_explicativo_MAE].visible,true););
+
+);
+
+</action>
+
+
+<action name="ocultar_videos_explicativos">
+set(hotspot[boton_video_explicativo_quechers].visible,false););
+set(hotspot[boton_video_explicativo_ple].visible,false););
+set(hotspot[boton_video_explicativo_uae].visible,false););
+set(hotspot[boton_video_explicativo_mae].visible,false););
+
+);
+
+</action>
+
+!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  -->
+<!--              ACCIONES COMIENZA -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  -->
+
+<action name="visible_p2_quechers">
+set(layer[p2_quechers].visible,true); 
+set(layer[r5_quechers].visible,true);
+set(layer[r6_quechers].visible,true);
+set(layer[r7_quechers].visible,true);
+set(layer[r8_quechers].visible,true);
+
+);
+
+</action>
+
+
+
+<action name="comienza_quechers">
+suma(); 
+set(layer[p2_quechers].visible,false); 
+set(layer[r5_quechers].visible,false);
+set(layer[r6_quechers].visible,false);
+set(layer[r7_quechers].visible,false);
+set(layer[r8_quechers].visible,false);
+set(layer[r5_quechers_respuestas].visible,false);
+set(layer[r6_quechers_respuestas].visible,false);
+set(layer[r7_quechers_respuestas].visible,false);
+set(layer[r8_quechers_respuestas].visible,false);
+alinea1();
+lookto(-41.41,17.93, 111.26,linear(12));
+set(hotspot[icono_metodo_quechers].visible,true);
+
+);
+
+</action>
+
+<action name="alinea1">
+
+set(image.prealign,-8|0|0);
+
+</action>
+
+<action name="comienza_ple">
+suma(); 
+set(layer[p2_ple].visible,false); 
+lookto(162.64,0.40, 106.68,linear(12));
+set(hotspot[icono_metodo_ple].visible,true);
+
+);
+
+</action>
+
+
+<action name="comienza_mae">
+suma(); 
+set(layer[p2_mae].visible,false); 
+lookto(172.65,4.25, 101.91,linear(12));
+set(hotspot[icono_metodo_mae].visible,true);
+
+);
+
+</action>
+
+<action name="comienza_uae">
+suma(); 
+set(layer[p2_uae].visible,false); 
+lookto(175.50,1.74, 115.7,linear(12));
+set(hotspot[icono_metodo_uae].visible,true);
+
+);
+
+</action>
+
+!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  -->
+<!--              VERIFICA PREGUNTAS QUECHERS -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  -->
+
+<action name="muestra_p3_quechers" >
+set(layer[p3_quechers].visible,true);
+set(layer[r9_quechers].visible,true);
+set(layer[r10_quechers].visible,true);
+set(layer[r11_quechers].visible,true);
+set(layer[r12_quechers].visible,true);
+set(layer[r13_quechers].visible,true);
+set(layer[r14_quechers].visible,true);
+
+  );
+
+</action>
+
+
+<action name="verifica_p3_quechers" >
+if( (contador1 == 8),
+set(layer[p3_quechers].visible,false);
+set(layer[r9_quechers].visible,false);
+set(layer[r10_quechers].visible,false);
+set(layer[r11_quechers].visible,false);
+set(layer[r12_quechers].visible,false);
+set(layer[r13_quechers].visible,false);
+set(layer[r14_quechers].visible,false);
+set(layer[r9_quechers_respuestas].visible,false);
+set(layer[r10_quechers_respuestas].visible,false);
+set(layer[r11_quechers_respuestas].visible,false);
+set(layer[r12_quechers_respuestas].visible,false);
+set(layer[r13_quechers_respuestas].visible,false);
+set(layer[r14_quechers_respuestas].visible,false);
+set(layer[p4_quechers].visible,true);
+set(layer[r15_quechers].visible,true);
+set(layer[r16_quechers].visible,true);
+set(layer[r17_quechers].visible,true);
+set(layer[r18_quechers].visible,true);
+set(layer[r19_quechers].visible,true);
+
+
+  );
+
+</action>
+
+
+<action name="verifica_p4_quechers" >
+if( (contador1 == 10),
+set(layer[p4_quechers].visible,false);
+set(layer[r15_quechers].visible,false);
+set(layer[r16_quechers].visible,false);
+set(layer[r17_quechers].visible,false);
+set(layer[r18_quechers].visible,false);
+set(layer[r19_quechers].visible,false);
+set(layer[r15_quechers_respuestas].visible,false);
+set(layer[r16_quechers_respuestas].visible,false);
+set(layer[r17_quechers_respuestas].visible,false);
+set(layer[r18_quechers_respuestas].visible,false);
+set(layer[r19_quechers_respuestas].visible,false);
+set(layer[p5_quechers].visible,true);
+set(layer[r20_quechers].visible,true);
+set(layer[r21_quechers].visible,true);
+set(layer[r22_quechers].visible,true);
+set(layer[r23_quechers].visible,true);
+set(layer[r24_quechers].visible,true);
+set(layer[r25_quechers].visible,true);
+set(layer[r26_quechers].visible,true);
+set(layer[r27_quechers].visible,true);
+
+
+  );
+
+</action>
+
+<action name="verifica_p5_quechers" >
+if( (contador1 == 18),
+set(layer[r20_quechers].visible,false);
+set(layer[r21_quechers].visible,false);
+set(layer[r22_quechers].visible,false);
+set(layer[r23_quechers].visible,false);
+set(layer[r24_quechers].visible,false);
+set(layer[r25_quechers].visible,false);
+set(layer[r26_quechers].visible,false);
+set(layer[r27_quechers].visible,false);
+set(layer[r20_quechers_respuestas].visible,false);
+set(layer[r21_quechers_respuestas].visible,false);
+set(layer[r22_quechers_respuestas].visible,false);
+set(layer[r23_quechers_respuestas].visible,false);
+set(layer[r24_quechers_respuestas].visible,false);
+set(layer[r25_quechers_respuestas].visible,false);
+set(layer[r26_quechers_respuestas].visible,false);
+set(layer[r27_quechers_respuestas].visible,false);
+set(layer[p5_quechers].visible,false);
+lookto(-170.69,6.51, 131.75,linear(12));
+set(hotspot[explicacion_quimica_analitica_verde].visible,true);
+  );
+
+</action>
+
+
+<action name="muestra_tabla_quechers" >
+set(layer[tabla_quechers].visible,true);
+set(layer[automatizacion_quechers1].visible,true);
+set(layer[consumo_energia_quechers1].visible,true);
+set(layer[coste_quechers1].visible,true);
+set(layer[ttos_adicionales_quechers1].visible,true);
+set(layer[seguridad_quechers1].visible,true);
+set(layer[automatizacion_quechers2].visible,true);
+set(layer[consumo_energia_quechers2].visible,true);
+set(layer[coste_quechers2].visible,true);
+set(layer[ttos_adicionales_quechers2].visible,true);
+set(layer[seguridad_quechers2].visible,true);
+set(layer[automatizacion_quechers3].visible,true);
+set(layer[consumo_energia_quechers3].visible,true);
+set(layer[coste_quechers3].visible,true);
+set(layer[ttos_adicionales_quechers3].visible,true);
+set(layer[seguridad_quechers3].visible,true);
+set(hotspot[boton_comprobar].visible,true);
+  );
+
+</action>
+
+!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  -->
+<!--              VERIFICA TABLA QUIMICA ANALITICA VERDE QUECHERS -->
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  -->
+
+<action name="muestra_respuestas_correctas_quimica_analitica_quechers" >
+set(layer[automatizacion_quechers1_r].visible,true);
+set(layer[consumo_energia_quechers1_r].visible,true);
+set(layer[coste_quechers1_r].visible,true);
+set(layer[ttos_adicionales_quechers1_r].visible,true);
+set(layer[seguridad_quechers1_r].visible,true);
+set(layer[automatizacion_quechers2_r].visible,true);
+set(layer[consumo_energia_quechers2_r].visible,true);
+set(layer[coste_quechers2_r].visible,true);
+set(layer[ttos_adicionales_quechers2_r].visible,true);
+set(layer[seguridad_quechers2_r].visible,true);
+set(layer[automatizacion_quechers3_r].visible,true);
+set(layer[consumo_energia_quechers3_r].visible,true);
+set(layer[coste_quechers3_r].visible,true);
+set(layer[ttos_adicionales_quechers3_r].visible,true);
+set(layer[seguridad_quechers3_r].visible,true);
+  );
+
+</action>
+
+
+<action name="result">
+	addlayer(res);
+	set(layer[res].type,text);
+	set(layer[res].align,center);
+	set(layer[res].y,200);
+	set(layer[res].width,550);
+	set(layer[res].height,100);
+	set(layer[res].alpha,1.0);
+	set(layer[res].bgcolor,0x2D3E50);
+	set(layer[res].padding,10);
+	set(layer[res].bgborder,2 0xFFFFFF 1.0);
+	set(layer[res].bgroundedge,6);
+	set(layer[res].css,font-family:verdana; font-size:18px; color:#FFFFFF;);
+	txtadd(layer[res].html,'
+     [p][center]El resultado correcto para el Método QuEChERS es 6.[br][br]
+
+	Tu puntuación ha sido: ',get(contador3),
+	[/p]);		
+    [br][br]
+	</action>
+
+
+
+</krpano>
+
+

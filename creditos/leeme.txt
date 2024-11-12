@@ -1,0 +1,6 @@
+
+incluir carpeta creditos en vtour
+incluir en tour.xml esto:
+	<include url="creditos/creditos.xml" />
+	
+editar el texto de profesores y equipo en creditos.xml

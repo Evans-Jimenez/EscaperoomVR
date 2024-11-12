@@ -1,0 +1,482 @@
+﻿<krpano version="1.21" title="Virtual Tour">
+
+	<include url="skin/vtourskin.xml" /> 
+		<include url="xml/acciones.xml" />
+  <!-- <include url="toolbox/toolbox.xml" />     -->
+	    <include url="creditos/creditos.xml" />
+    <include url="%VIEWER%/plugins/showtext.xml" />
+	<include url="acciones.xml" />
+	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
+	<skin_settings maps="false"
+	               maps_type="google"
+	               maps_bing_api_key=""
+	               maps_google_api_key=""
+	               maps_zoombuttons="false"
+	               maps_loadonfirstuse="true"
+	               gyro="false"
+	               gyro_keeplookingdirection="false"
+	               webvr="true"
+	               webvr_keeplookingdirection="false"
+	               webvr_prev_next_hotspots="false"
+	               autotour="false"
+	               littleplanetintro="false"
+	               followmousecontrol="false"
+	               title="false"
+	               thumbs="false"
+	               thumbs_width="120" thumbs_height="80" thumbs_padding="10" thumbs_crop="0|40|240|160"
+	               thumbs_opened="false"
+	               thumbs_text="false"
+	               thumbs_dragging="true"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="false"
+	               thumbs_scrollindicator="false"
+	               thumbs_loop="false"
+	               tooltips_buttons="false"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="false"
+	               tooltips_mapspots="false"
+	               deeplinking="false"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext=""
+	               layout_width="100%"
+	               layout_maxwidth="814"
+	               controlbar_width="-24"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin.png"
+	               design_bgcolor="0x2D3E50"
+	               design_bgalpha="0.8"
+	               design_bgborder="0"
+	               design_bgroundedge="1"
+	               design_bgshadow="0 4 10 0x000000 0.3"
+	               design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+	               design_thumbborder_padding="2"
+	               design_thumbborder_bgroundedge="0"
+	               design_text_css="color:#FFFFFF; font-family:Arial;"
+	               design_text_shadow="1"
+	               />
+
+	<!--
+	    For an alternative skin design either change the <skin_settings> values 
+	    from above or optionally include one of the predefined designs from below.
+	-->
+	<!-- <include url="skin/vtourskin_design_flat_light.xml"  /> -->
+	<!-- <include url="skin/vtourskin_design_glass.xml"       /> -->
+	<!-- <include url="skin/vtourskin_design_ultra_light.xml" /> -->
+	<!-- <include url="skin/vtourskin_design_117.xml"         /> -->
+	<!-- <include url="skin/vtourskin_design_117round.xml"    /> -->
+	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
+	
+<action name="startup" autorun="onstart">
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(startscene), null, MERGE);
+		if(startactions !== null, startactions() );
+		def (contador1, integer);
+		def (contador2, integer);
+		set(view.architectural, 1.0);
+		delayedcall(5.0, inicio(););
+	</action>
+
+  <plugin name="soundinterface"
+	        url.flash="%SWFPATH%/plugins/soundinterface.swf"
+	        url.html5="%SWFPATH%/plugins/soundinterface.js"
+	        rootpath=""
+	        preload="true"
+	        keep="false"
+	        volume="1.0"
+            mute="false"
+	        />
+<!-- contadores -->
+<layer name="cont" keep="true" type="container" align="lefttop" width="500"  height="250" maskchildren="true" visible="true" bgcapture="false" zorder="1">
+<layer name="contadortx1"
+       type="text"
+       align="lefttop" x="10" y="10"
+       html="00"
+       css="font-family:Verdana; font-size:24px; color:#129239;"
+       vcenter="true"
+       padding="2"
+       wordwrap="true"
+       bg="true"
+       bgcolor="0x2D3E50"
+	   bordercolor="0x129239"
+       bgalpha="0.8"
+       bgborder="2"
+       bgroundedge="3"
+       bgshadow=""
+       txtshadow="3"
+       mergedalpha="true"
+       interactivecontent="false"
+	   handcursor="false"
+       onhover="showtext(aciertos,cont);"
+	   scale="5"
+       />
+	  <layer name="contadortx2"
+       type="text"
+       align="lefttop" x="60" y="10"
+       html="00"
+       css="font-family:Verdana; font-size:24px; color:#FD200A;"
+       vcenter="true"
+       padding="2"
+       wordwrap="true"
+       bg="true"
+       bgcolor="0x2D3E50"
+	   bordercolor="0x#FD200A"
+       bgalpha="0.8"
+       bgborder="2"
+       bgroundedge="3"
+       bgshadow=""
+       txtshadow="3"
+       mergedalpha="true"
+       interactivecontent="false"
+	   handcursor="false"
+       onhover="showtext(errores,cont);"
+	   visible="false"
+       />
+
+     
+
+</layer>	
+	
+ <scene name="escena1" title="planta0" onstart="" havevrimage.mobilevr="false" havevrimage.no-mobilevr="true" thumburl="panos/planta0.tiles/thumb.jpg" lat="18.48788333" lng="-69.96322500" alt="32.95" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="86.0" vlookat="0.870" fovtype="MFOV" fov="140" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/planta0.tiles/preview.jpg" />
+
+		<image prealign="0|0.0|0" if="!(webvr.isenabled OR device.mobilevr)">
+			<cube url="panos/planta0.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,768,1664" />
+		</image>
+
+		<image prealign="0|0.0|0" if="webvr.isenabled OR device.mobilevr">
+			<cube url="panos/planta0.tiles/vr/pano_%s.jpg" />
+		</image>
+		
+		
+		<hotspot name="cartel1" distorted="false" visible="true"  handcursor="true" url="recursos/cartel1.png" ath="80.00264873804713" atv="2.6125003772896487" scale="0.8"   onclick="loadpanoscene(videopano1.xml,videopano);"  />  
+
+
+
+
+<events name="currentpano"
+	        
+					
+	        onnewpano="playsound(audio1, 'recursos/audio0.mp3', 1;"
+	        />
+		
+
+
+
+</scene>
+
+
+<scene name="escena2" title="planta4" onstart="stopallsounds(); play_vyond1();" havevrimage.mobilevr="false" havevrimage.no-mobilevr="true" thumburl="panos/planta4.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="140" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/planta4.tiles/preview.jpg" />
+
+		<image if="!(webvr.isenabled OR device.mobilevr)">
+			<cube url="panos/planta4.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,768,1664" />
+		</image>
+
+		<image if="webvr.isenabled OR device.mobilevr">
+			<cube url="panos/planta4.tiles/vr/pano_%s.jpg" />
+		</image>
+
+
+<hotspot name="vyond1"
+	         	url.html5="plugins/videoplayer.js"
+	        	url.flash="plugins/videoplayer.swf"
+	        	videourl="recursos/vyond1.mp4"
+	        	posterurl="recursos/fondo_verde.png"
+	        	ath="0" atv="0" scale="1" rx="0" ry="0" rz="0"
+				pausedonstart="false"
+				scale.mobile="0.5"
+	    	    alpha="1"
+				handcursor="false"
+				visible="true"
+	    	    distorted="true"
+	    	    zorder="6"
+	    	    loop="false"
+		        volume="1.0"
+		        directionalsound="true"
+		        range="90.0"
+		        rangefalloff="1.0"
+		        outofrangevolume="0.0"
+		        onvideoready=""
+		        onvideoplay=""
+		        onvideopaused=""
+		        onerror=""
+				onvideocomplete="set(hotspot[vyond1].visible,false); set(hotspot[pregunta].visible,true); set(hotspot[respuestaa].visible,true); set(hotspot[respuestab].visible,true); set(hotspot[respuestac].visible,true); set(hotspot[respuestad].visible,true);	 "
+				
+/>
+
+
+<!-- <hotspot name="continuar" distorted="false" visible="true"  handcursor="true" url="recursos/continuar.png" scale="0.1"   ath="-45.65800842916212" atv="-11.060885995661728"  
+		onclick="loadpanoscene(videopano2.xml, videopano);"  /> -->
+
+
+
+<hotspot name="pregunta" distorted="false" visible="false"  handcursor="false" url="recursos/1pregunta.png" scale="0.6"   ath="3.679421126601653" atv="-27.68734171980638"
+		onclick=""  />
+
+<hotspot name="respuestaa" distorted="false" visible="false"  handcursor="true" url="recursos/1respuestaa.png" scale="0.6"   ath="3.8426934305222176" atv="-8.081506910430221"
+		onclick="resta(); set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retroa].visible,true);"  />
+		
+<hotspot name="respuestab" distorted="false" visible="false"  handcursor="true" url="recursos/1respuestab.png" scale="0.6"   ath="4.1690479919101335" atv="5.10126242453948"  
+		onclick="resta(); set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retrob].visible,true);"  />
+
+<hotspot name="respuestac" distorted="false" visible="false"  handcursor="true" url="recursos/1respuestac.png" scale="0.6"   ath="4.1690479919101335" atv="18.360610871458697"  
+		onclick="resta(); set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retroc].visible,true);"  />
+		
+<hotspot name="respuestad" distorted="false" visible="false"  handcursor="true" url="recursos/1respuestad.png" scale="0.6"   ath="4.332125033229147" atv="29.37856437565716"  
+		onclick="suma (); set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retrod].visible,true);"  />
+
+<hotspot name="retroa" distorted="false" visible="false"  handcursor="true" url="recursos/1retroa.png" scale="0.6"  ath="-5.643931435623301" atv="6.704554469557536" 
+		onclick="set(hotspot[retroa].visible,false); set(hotspot[vyond2].visible,true); play_vyond2();"  />
+
+<hotspot name="retrob" distorted="false" visible="false"  handcursor="true" url="recursos/1retrob.png" scale="0.6"  ath="-5.643931435623301" atv="6.704554469557536" 
+		onclick="set(hotspot[retrob].visible,false); set(hotspot[vyond2].visible,true); play_vyond2();"  />
+		
+<hotspot name="retroc" distorted="false" visible="false"  handcursor="true" url="recursos/1retroc.png" scale="0.6"   ath="-5.643931435623301" atv="6.704554469557536" 
+		onclick="set(hotspot[retroc].visible,false); set(hotspot[vyond2].visible,true); play_vyond2();"  />
+		
+<hotspot name="retrod" distorted="false" visible="false"  handcursor="true" url="recursos/1retrod.png" scale="0.6"  ath="-5.643931435623301" atv="6.704554469557536" 
+		onclick="set(hotspot[retrod].visible,false); set(hotspot[vyond2].visible,true); play_vyond2(); "  />
+		
+		
+		
+<hotspot name="vyond2"
+	         	url.html5="plugins/videoplayer.js"
+	        	url.flash="plugins/videoplayer.swf"
+	        	videourl="recursos/vyond2.mp4"
+	        	posterurl="recursos/fondo_verde.png"
+	        	ath="0" atv="0" scale="0.7" rx="0" ry="0" rz="0"
+				pausedonstart="true"
+				scale.mobile="0.5"
+	    	    alpha="1"
+				visible="false"
+	    	    distorted="true"
+	    	    zorder="6"
+	    	    loop="false"
+		        volume="1.0"
+		        directionalsound="true"
+		        range="90.0"
+		        rangefalloff="1.0"
+		        outofrangevolume="0.0"
+		        onvideoready=""
+		        onvideoplay=""
+		        onvideopaused=""
+		        onerror=""
+				onclick=" "
+				handcursor="false"
+				onvideocomplete="loadpanoscene(tour.xml, escena3);"
+/>
+		
+</scene> 
+	
+
+
+<scene name="escena3" title="planta3" onstart="stopallsounds(); play_vyond3();" havevrimage.mobilevr="false" havevrimage.no-mobilevr="true" thumburl="panos/planta3.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/planta3.tiles/preview.jpg" />
+
+		<image if="!(webvr.isenabled OR device.mobilevr)">
+			<cube url="panos/planta3.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,768,1664" />
+		</image>
+
+		<image if="webvr.isenabled OR device.mobilevr">
+			<cube url="panos/planta3.tiles/vr/pano_%s.jpg" />
+		</image>
+
+<hotspot name="vyond3"
+	         	url.html5="plugins/videoplayer.js"
+	        	url.flash="plugins/videoplayer.swf"
+	        	videourl="recursos/vyond3.mp4"
+	        	posterurl="recursos/fondo_verde.png"
+	        	ath="0" atv="0" scale="0.5" rx="0" ry="0" rz="0"
+				pausedonstart="false"
+				scale.mobile="0.4"
+	    	    alpha="1"
+				visible="true"
+	    	    distorted="true"
+	    	    zorder="6"
+	    	    loop="false"
+		        volume="1.0"
+		        directionalsound="true"
+		        range="90.0"
+		        rangefalloff="1.0"
+		        outofrangevolume="0.0"
+		        onvideoready=""
+		        onvideoplay=""
+		        onvideopaused=""
+		        onerror=""
+				handcursor="false"
+				onvideocomplete="set(hotspot[vyond3].visible,false); set(hotspot[pregunta].visible,true); set(hotspot[respuestaa].visible,true); set(hotspot[respuestab].visible,true); set(hotspot[respuestac].visible,true); set(hotspot[respuestad].visible,true);	 "
+/>
+
+
+<!-- <hotspot name="continuar" distorted="false" visible="true"  handcursor="true" url="recursos/continuar.png" scale="0.1"   ath="-45.65800842916212" atv="-11.060885995661728"  
+		onclick="loadpanoscene(videopano2.xml, videopano);"  /> -->
+
+
+
+<hotspot name="pregunta" distorted="false" visible="false"  handcursor="false" url="recursos/2pregunta.png" scale="0.6"   ath="3.679421126601653" atv="-27.68734171980638"
+		onclick=""  />
+
+<hotspot name="respuestaa" distorted="false" visible="false"  handcursor="true" url="recursos/2respuestaa.png" scale="0.6"   ath="3.3278473165282776" atv="-12.676342640391228"
+		onclick="set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retroa].visible,true);"  />
+		
+<hotspot name="respuestab" distorted="false" visible="false"  handcursor="true" url="recursos/2respuestab.png" scale="0.6"   ath="3.9633394263028663" atv="0.8878143028299009"  
+		onclick="suma (); set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retrob].visible,true);"  />
+
+<hotspot name="respuestac" distorted="false" visible="false"  handcursor="true" url="recursos/2respuestac.png" scale="0.6"   ath="4.066206834685261" atv="16.58044532553157"  
+		onclick="set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retroc].visible,true);"  />
+		
+<hotspot name="respuestad" distorted="false" visible="false"  handcursor="true" url="recursos/2respuestad.png" scale="0.6"   ath="3.6119876356496547" atv="28.531280326371526"  
+		onclick="set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retrod].visible,true);"  />
+
+<hotspot name="retroa" distorted="false" visible="false"  handcursor="true" url="recursos/2retroa.png" scale="0.6"  ath="-5.643931435623301" atv="6.704554469557536" 
+		onclick="loadpanoscene(tour.xml, escena4); "  />
+
+<hotspot name="retrob" distorted="false" visible="false"  handcursor="true" url="recursos/2retrob.png" scale="0.6"   ath="-5.643931435623301" atv="6.704554469557536" 
+		onclick="loadpanoscene(tour.xml, escena4); "  />
+		
+<hotspot name="retroc" distorted="false" visible="false"  handcursor="true" url="recursos/2retroc.png" scale="0.6"   ath="-5.643931435623301" atv="6.704554469557536" 
+		onclick="loadpanoscene(tour.xml, escena4); "  />
+		
+<hotspot name="retrod" distorted="false" visible="false"  handcursor="true" url="recursos/2retrod.png" scale="0.6"  ath="-5.643931435623301" atv="6.704554469557536" 
+		onclick="loadpanoscene(tour.xml, escena4);  "  />
+
+
+
+	</scene> 
+
+
+
+
+<scene name="escena4" title="planta2" onstart="stopallsounds(); play_vyond4();" havevrimage.mobilevr="false" havevrimage.no-mobilevr="true" thumburl="panos/planta2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/planta2.tiles/preview.jpg" />
+
+		<image if="!(webvr.isenabled OR device.mobilevr)">
+			<cube url="panos/planta2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,768,1664" />
+		</image>
+
+		<image if="webvr.isenabled OR device.mobilevr">
+			<cube url="panos/planta2.tiles/vr/pano_%s.jpg" />
+		</image>
+
+<!-- <hotspot name="continuar" distorted="false" visible="true"  handcursor="true" url="recursos/continuar.png" scale="0.1"   ath="-45.65800842916212" atv="-11.060885995661728"  
+		onclick="loadpanoscene(videopano4.xml, videopano);"  /> -->
+
+<hotspot name="vyond4"
+	         	url.html5="plugins/videoplayer.js"
+	        	url.flash="plugins/videoplayer.swf"
+	        	videourl="recursos/vyond4.mp4"
+	        	posterurl="recursos/fondo_verde.png"
+	        	ath="0" atv="0" scale="0.5" rx="0" ry="0" rz="0"
+				pausedonstart="false"
+				scale.mobile="0.5"
+	    	    alpha="1"
+				visible="true"
+	    	    distorted="true"
+	    	    zorder="6"
+	    	    loop="false"
+		        volume="1.0"
+		        directionalsound="true"
+		        range="90.0"
+		        rangefalloff="1.0"
+		        outofrangevolume="0.0"
+		        onvideoready=""
+		        onvideoplay=""
+		        onvideopaused=""
+		        onerror=""
+				handcursor="false"
+				onvideocomplete="set(hotspot[vyond4].visible,false); set(hotspot[pregunta].visible,true); set(hotspot[respuestaa].visible,true); set(hotspot[respuestab].visible,true); set(hotspot[respuestac].visible,true); set(hotspot[respuestad].visible,true);	 "
+/>
+
+
+<hotspot name="pregunta" distorted="false" visible="false"  handcursor="false" url="recursos/3pregunta.png" scale="0.8"   ath="1" atv="-14"
+		onclick=""  />
+
+<hotspot name="respuestaa" distorted="false" visible="false"  handcursor="true" url="recursos/3respuestaa.png" scale="0.6"   ath="-49.2929211363915" atv="14.532863053064588"
+		onclick="set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retroa].visible,true);"  />
+		
+<hotspot name="respuestab" distorted="false" visible="false"  handcursor="true" url="recursos/3respuestab.png" scale="0.6"   ath="-22.64931440570882" atv="20.137293970072744"  
+		onclick=" suma (); set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retrob].visible,true);"  />
+
+<hotspot name="respuestac" distorted="false" visible="false"  handcursor="true" url="recursos/3respuestac.png" scale="0.6"   ath="17.072291580628416" atv="20.63901338477811"  
+		onclick="set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retroc].visible,true);"  />
+		
+<hotspot name="respuestad" distorted="false" visible="false"  handcursor="true" url="recursos/3respuestad.png" scale="0.6"   ath="44.3308148485753" atv="15.625144060721096"  
+		onclick="set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retrod].visible,true);"  />
+
+<hotspot name="retroa" distorted="false" visible="false"  handcursor="true" url="recursos/3retroa.png" scale="0.6"   ath="-5.643931435623301" atv="6.704554469557536" 
+		onclick="loadpanoscene(tour.xml, escena5); "  />
+
+<hotspot name="retrob" distorted="false" visible="false"  handcursor="true" url="recursos/3retrob.png" scale="0.6"   ath="-5.643931435623301" atv="6.704554469557536" 
+		onclick="loadpanoscene(tour.xml, escena5); "  />
+		
+<hotspot name="retroc" distorted="false" visible="false"  handcursor="true" url="recursos/3retroc.png" scale="0.6"   ath="-5.643931435623301" atv="6.704554469557536" 
+		onclick="loadpanoscene(tour.xml, escena5); "  />
+		
+<hotspot name="retrod" distorted="false" visible="false"  handcursor="true" url="recursos/3retrod.png" scale="0.6"   ath="-5.643931435623301" atv="6.704554469557536" 
+		onclick="loadpanoscene(tour.xml, escena5);  "  />
+
+
+
+
+	</scene>
+
+
+<scene name="escena5" title="planta5" onstart="stopallsounds(); play_vyond4();" havevrimage.mobilevr="false" havevrimage.no-mobilevr="true" thumburl="panos/planta5.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="140" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/planta5.tiles/preview.jpg" />
+
+		<image if="!(webvr.isenabled OR device.mobilevr)">
+			<cube url="panos/planta5.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,768,1664" />
+		</image>
+
+		<image if="webvr.isenabled OR device.mobilevr">
+			<cube url="panos/planta5.tiles/vr/pano_%s.jpg" />
+		</image>
+
+<events name="currentpano"
+	        
+					
+	        onnewpano="playsound(audio5, 'recursos/audio2.mp3', 1;"
+	        />
+		
+
+
+	</scene>
+	
+	
+
+
+
+
+</krpano>
