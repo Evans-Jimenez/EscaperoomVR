@@ -54,7 +54,7 @@
 <action name="Mostrarhotspot">
 
 callwhen(plugin[video].time GT 000, set(hotspot[continuar].visible,false);); 
-callwhen(plugin[video].time GT 034, set(hotspot[continuar].visible,true); );
+callwhen(plugin[video].time GT 005, set(hotspot[continuar].visible,true); );
 
 
 
