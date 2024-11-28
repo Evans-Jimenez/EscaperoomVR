@@ -2,7 +2,7 @@
 
 	<include url="skin/vtourskin.xml" /> 
 		<include url="xml/acciones.xml" />
-  <!-- <include url="toolbox/toolbox.xml" />     -->
+   <include url="toolbox/toolbox.xml" />     
 	    <include url="creditos/creditos.xml" />
     <include url="%VIEWER%/plugins/showtext.xml" />
 	<include url="acciones.xml" />
@@ -83,6 +83,9 @@
 		delayedcall(5.0, inicio(););
 	</action>
 
+
+
+
   <plugin name="soundinterface"
 	        url.flash="%SWFPATH%/plugins/soundinterface.swf"
 	        url.html5="%SWFPATH%/plugins/soundinterface.js"
@@ -93,8 +96,8 @@
             mute="false"
 	        />
 <!-- contadores -->
-<layer name="cont" keep="true" type="container" align="lefttop" width="500"  height="250" maskchildren="true" visible="true" bgcapture="false" zorder="1">
-<layer name="contadortx1"
+ <layer name="cont" keep="true" type="container" align="lefttop" width="500"  height="250" maskchildren="true" visible="true" bgcapture="false" zorder="1"> 
+<layer name="contadortx1" visible="false"
        type="text"
        align="lefttop" x="10" y="10"
        html="00"
@@ -142,6 +145,12 @@
      
 
 </layer>	
+
+
+
+
+
+
 	
  <scene name="escena1" title="planta0" onstart="" havevrimage.mobilevr="false" havevrimage.no-mobilevr="true" thumburl="panos/planta0.tiles/thumb.jpg" lat="18.48788333" lng="-69.96322500" alt="32.95" heading="0.0">
 		
@@ -164,7 +173,6 @@
 
 
 
-
 <events name="currentpano"
 	        
 					
@@ -172,7 +180,18 @@
 	        />
 		
 
-
+<hotspot name="resulta" type="text" ath="18.03996306582934" atv="-22.349599144821116"  html="00"   css="font-family:Verdana; font-size:44px; color:#ffffff;"
+       vcenter="true"
+       padding="2"
+       wordwrap="true"
+       bg="true"
+       bgcolor="0x2D3E50"
+	   bordercolor="0x129239"
+       bgalpha="0.8"
+       bgborder="2"
+       bgroundedge="3"
+       bgshadow=""
+       txtshadow="3" />
 
 </scene>
 
@@ -194,6 +213,21 @@
 		</image>
 
 
+<hotspot name="resulta1" visible="false" type="text" ath="-68.22878210166738" atv="-22.42452264991338"  html="00"   css="font-family:Verdana; font-size:44px; color:#ffffff;"
+       vcenter="true"
+       padding="2"
+       wordwrap="true"
+       bg="true"
+       bgcolor="0x2D3E50"
+	   bordercolor="0x129239"
+       bgalpha="0.8"
+       bgborder="2"
+       bgroundedge="3"
+       bgshadow=""
+       txtshadow="3" />
+
+
+		 
 <hotspot name="vyond1"
 	         	url.html5="plugins/videoplayer.js"
 	        	url.flash="plugins/videoplayer.swf"
@@ -240,7 +274,7 @@
 		onclick="resta(); set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retroc].visible,true);"  />
 		
 <hotspot name="respuestad" distorted="false" visible="false"  handcursor="true" url="recursos/1respuestad.png" scale="0.6"   ath="4.332125033229147" atv="29.37856437565716"  
-		onclick="suma (); set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retrod].visible,true);"  />
+		onclick="set(hotspot[resulta1].visible,true); suma (); set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retrod].visible,true);"  />
 
 <hotspot name="retroa" distorted="false" visible="false"  handcursor="true" url="recursos/1retroa.png" scale="0.6"  ath="-5.643931435623301" atv="6.704554469557536" 
 		onclick="set(hotspot[retroa].visible,false); set(hotspot[vyond2].visible,true); play_vyond2();"  />
@@ -303,6 +337,26 @@
 			<cube url="panos/planta3.tiles/vr/pano_%s.jpg" />
 		</image>
 
+
+
+
+<hotspot name="resulta2" visible="false" type="text" ath="-54.22878210166738" atv="-21.42452264991338"  html="00"   css="font-family:Verdana; font-size:44px; color:#ffffff;"
+       vcenter="true"
+       padding="2"
+       wordwrap="true"
+       bg="true"
+       bgcolor="0x2D3E50"
+	   bordercolor="0x129239"
+       bgalpha="0.8"
+       bgborder="2"
+       bgroundedge="3"
+       bgshadow=""
+       txtshadow="3" />
+
+
+
+
+
 <hotspot name="vyond3"
 	         	url.html5="plugins/videoplayer.js"
 	        	url.flash="plugins/videoplayer.swf"
@@ -342,7 +396,7 @@
 		onclick="set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retroa].visible,true);"  />
 		
 <hotspot name="respuestab" distorted="false" visible="false"  handcursor="true" url="recursos/2respuestab.png" scale="0.6"   ath="3.9633394263028663" atv="0.8878143028299009"  
-		onclick="suma (); set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retrob].visible,true);"  />
+		onclick="set(hotspot[resulta2].visible,true); suma (); set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retrob].visible,true);"  />
 
 <hotspot name="respuestac" distorted="false" visible="false"  handcursor="true" url="recursos/2respuestac.png" scale="0.6"   ath="4.066206834685261" atv="16.58044532553157"  
 		onclick="set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retroc].visible,true);"  />
@@ -388,6 +442,21 @@
 <!-- <hotspot name="continuar" distorted="false" visible="true"  handcursor="true" url="recursos/continuar.png" scale="0.1"   ath="-45.65800842916212" atv="-11.060885995661728"  
 		onclick="loadpanoscene(videopano4.xml, videopano);"  /> -->
 
+<hotspot name="resulta3" visible="false" type="text" ath="-54.22878210166738" atv="-21.42452264991338"  html="00"   css="font-family:Verdana; font-size:44px; color:#ffffff;"
+       vcenter="true"
+       padding="2"
+       wordwrap="true"
+       bg="true"
+       bgcolor="0x2D3E50"
+	   bordercolor="0x129239"
+       bgalpha="0.8"
+       bgborder="2"
+       bgroundedge="3"
+       bgshadow=""
+       txtshadow="3" />
+
+
+
 <hotspot name="vyond4"
 	         	url.html5="plugins/videoplayer.js"
 	        	url.flash="plugins/videoplayer.swf"
@@ -422,7 +491,7 @@
 		onclick="set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retroa].visible,true);"  />
 		
 <hotspot name="respuestab" distorted="false" visible="false"  handcursor="true" url="recursos/3respuestab.png" scale="0.6"   ath="-22.64931440570882" atv="20.137293970072744"  
-		onclick=" suma (); set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retrob].visible,true);"  />
+		onclick="set(hotspot[resulta3].visible,true);  suma (); set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retrob].visible,true);"  />
 
 <hotspot name="respuestac" distorted="false" visible="false"  handcursor="true" url="recursos/3respuestac.png" scale="0.6"   ath="17.072291580628416" atv="20.63901338477811"  
 		onclick="set(hotspot[pregunta].visible,false); set(hotspot[respuestaa].visible,false); set(hotspot[respuestab].visible,false); set(hotspot[respuestac].visible,false); set(hotspot[respuestad].visible,false); set(hotspot[retroc].visible,true);"  />
@@ -469,7 +538,9 @@
 					
 	        onnewpano="playsound(audio5, 'recursos/audio2.mp3', 1;"
 	        />
-		
+
+
+
 
 
 	</scene>

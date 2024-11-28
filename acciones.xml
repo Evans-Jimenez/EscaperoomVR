@@ -17,6 +17,12 @@ set(layer[contadortx2].html, calc(contador2));
 <action name="suma" >
 add(contador1,2);
 set(layer[contadortx1].html, calc(contador1));
+set(hotspot[resulta].html, calc(contador1));
+set(hotspot[resulta1].html, calc(contador1));
+set(hotspot[resulta2].html, calc(contador1));
+set(hotspot[resulta3].html, calc(contador1));
+set(hotspot[resulta4].html, calc(contador1));
+set(hotspot[resulta5].html, calc(contador1));
 set(enabled, false);
 </action>
 
